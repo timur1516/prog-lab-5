@@ -1,6 +1,7 @@
 package ru.timur.Commands;
 
 import ru.timur.Controllers.CommandsController;
+import ru.timur.Exceptions.FieldInputException;
 import ru.timur.Exceptions.WrongArgumentsException;
 import ru.timur.UI.UserIO;
 

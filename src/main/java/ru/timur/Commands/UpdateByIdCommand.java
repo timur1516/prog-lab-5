@@ -1,5 +1,6 @@
 package ru.timur.Commands;
 
+import ru.timur.Collection.Worker;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.FieldInputException;
 import ru.timur.Exceptions.WrongArgumentsException;
@@ -19,7 +20,7 @@ public class UpdateByIdCommand extends UserCommand {
 
     @Override
     public void execute(String[] commandArgs) throws FieldInputException{
-        this.collectionController.update(Long.parseLong(commandArgs[0]), this.workerReader.readWorker());
+        this.collectionController.update(Long.parseLong(commandArgs[0]), (Worker) data);
     }
 
     @Override
@@ -33,5 +34,10 @@ public class UpdateByIdCommand extends UserCommand {
         if (!this.collectionController.containsId(Long.parseLong(commandArgs[0]))) {
             throw new NoSuchElementException("No element with such id!");
         }
+    }
+
+    @Override
+    public void readData() throws FieldInputException {
+        this.data = this.workerReader.readWorker();
     }
 }

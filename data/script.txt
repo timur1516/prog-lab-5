@@ -1,7 +1,16 @@
-show
 info
 add
-name
-1
+name3
 5
+1
 2
+01.02.2021
+01.02.2022
+FIRED
+125
+RED
+VATICAN
+remove_by_id 1
+show
+clear
+remove_first

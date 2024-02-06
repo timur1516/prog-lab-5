@@ -17,12 +17,16 @@ public class RemoveGreaterCommand extends UserCommand {
 
     @Override
     public void execute(String[] commandArgs) throws FieldInputException {
-        Worker worker = this.workerReader.readWorker();
-        this.collectionController.removeGreater(worker);
+        this.collectionController.removeGreater((Worker) data);
     }
 
     @Override
     public void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException {
         if(commandArgs.length != 0) throw new WrongArgumentsException("Wrong amount of arguments!");
+    }
+
+    @Override
+    public void readData() throws FieldInputException {
+        this.data = this.workerReader.readWorker();
     }
 }

@@ -19,6 +19,8 @@ public abstract class UserCommand {
      * Command description
      */
     private final String description;
+
+    protected Object data;
     public UserCommand(String name, String description){
         this.name = name;
         this.arguments = "";
@@ -50,6 +52,10 @@ public abstract class UserCommand {
      * @throws WrongArgumentsException if arguments are wrong
      */
     public abstract void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException;
+
+    public void readData() throws FieldInputException {
+        this.data = null;
+    }
 
     @Override
     public boolean equals(Object o) {

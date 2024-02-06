@@ -67,9 +67,11 @@ public class WorkerReader extends ValueReader {
     }
 
     public Status readStatus() throws FieldInputException {
-        userIO.printLn("List of possible status values:");
-        for (Status i : Status.values()) {
-            userIO.printLn(i);
+        if(!Constants.SCRIPT_MODE) {
+            userIO.printLn("List of possible status values:");
+            for (Status i : Status.values()) {
+                userIO.printLn(i);
+            }
         }
         return Status.valueOf(readValue("status", WorkerValidators.statusValidator));
     }
@@ -80,16 +82,20 @@ public class WorkerReader extends ValueReader {
         return Long.parseLong(readValue("height", WorkerValidators.heightValidator));
     }
     public Color readEyeColor() throws FieldInputException {
-        userIO.printLn("List of possible eye color values:");
-        for (Color i : Color.values()) {
-            userIO.printLn(i);
+        if(!Constants.SCRIPT_MODE) {
+            userIO.printLn("List of possible eye color values:");
+            for (Color i : Color.values()) {
+                userIO.printLn(i);
+            }
         }
         return Color.valueOf(readValue("eye color", WorkerValidators.eyeColorValidator));
     }
     public Country readNationality() throws FieldInputException {
-        userIO.printLn("List of possible nationality values:");
-        for (Country i : Country.values()) {
-            userIO.printLn(i);
+        if(!Constants.SCRIPT_MODE) {
+            userIO.printLn("List of possible nationality values:");
+            for (Country i : Country.values()) {
+                userIO.printLn(i);
+            }
         }
         return Country.valueOf(readValue("nationality", WorkerValidators.nationalityValidator));
     }

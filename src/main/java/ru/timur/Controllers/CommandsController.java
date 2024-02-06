@@ -74,23 +74,49 @@ public class CommandsController {
     }
 
     /**
-     * This method finds command in list of commands, validates its arguments and that executes it
-     * @throws NoSuchElementException if there is no such command found
-     * @throws WrongArgumentsException if wrong arguments given
-     * @throws FieldInputException in case of wrong input while executing (works in script mode)
+     * Method to find command, validate its argument and read required data
+     *
      * @param commandName String name of command to execute
      * @param commandArgs Array of String values with command arguments
+     * @return UserCommand
+     * @throws WrongArgumentsException if wrong arguments given
+     * @throws NoSuchElementException if there is no such command found
+     * @throws FieldInputException if error while reading data element happened (used for scriptMode)
      */
-    public void findAndExecute(String commandName, String[] commandArgs) throws NoSuchElementException, WrongArgumentsException, IOException {
+    public UserCommand launchCommand(String commandName, String[] commandArgs) throws WrongArgumentsException, NoSuchElementException, FieldInputException {
         if(!this.commandsList.stream().anyMatch(userCommand -> userCommand.getName().equals(commandName))){
             throw new NoSuchElementException("Command '" + commandName + "' not found!");
         }
+
         UserCommand command;
+
         command = this.commandsList
                 .stream()
                 .filter(userCommand -> userCommand.getName().equals(commandName))
                 .findFirst().get();
         command.validateCommandArgs(commandArgs);
-        command.execute(commandArgs);
+
+        command.readData();
+        return command;
     }
+//    /**
+//     * This method finds command in list of commands, validates its arguments and that executes it
+//     * @throws NoSuchElementException if there is no such command found
+//     * @throws WrongArgumentsException if wrong arguments given
+//     * @throws FieldInputException in case of wrong input while executing (works in script mode)
+//     * @param commandName String name of command to execute
+//     * @param commandArgs Array of String values with command arguments
+//     */
+//    public void findAndExecute(String commandName, String[] commandArgs) throws NoSuchElementException, WrongArgumentsException, IOException {
+//        if(!this.commandsList.stream().anyMatch(userCommand -> userCommand.getName().equals(commandName))){
+//            throw new NoSuchElementException("Command '" + commandName + "' not found!");
+//        }
+//        UserCommand command;
+//        command = this.commandsList
+//                .stream()
+//                .filter(userCommand -> userCommand.getName().equals(commandName))
+//                .findFirst().get();
+//        command.validateCommandArgs(commandArgs);
+//        command.execute(commandArgs);
+//    }
 }
