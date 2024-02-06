@@ -1,0 +1,7 @@
+show
+info
+add
+name
+1
+5
+2

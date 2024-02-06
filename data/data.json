@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "name1",
+    "coordinates": {
+      "x": 1.0,
+      "y": 5.0
+    },
+    "creationDate": "06.02.2024 17:29",
+    "salary": 46,
+    "startDate": "01.02.2021",
+    "endDate": "02.05.5213",
+    "status": "HIRED",
+    "person": {
+      "height": 151123,
+      "eyeColor": "BLUE",
+      "nationality": "USA"
+    }
+  },
+  {
+    "id": 2,
+    "name": "name2",
+    "coordinates": {
+      "x": 2.0,
+      "y": 6.0
+    },
+    "creationDate": "06.02.2024 17:29",
+    "salary": 2,
+    "startDate": "01.02.2021",
+    "endDate": "02.05.5213",
+    "status": "FIRED",
+    "person": {
+      "height": 265,
+      "eyeColor": "RED",
+      "nationality": "VATICAN"
+    }
+  }
+]

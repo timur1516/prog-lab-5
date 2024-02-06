@@ -1,0 +1,298 @@
+@startuml
+class ru.timur.Main {
++ {static} void main(String[])
+}
+enum ru.timur.Collection.Status {
++  FIRED
++  HIRED
++  REGULAR
++  PROBATION
+}
+class ru.timur.Collection.Worker {
+- long id
+- String name
+- Coordinates coordinates
+- java.time.ZonedDateTime creationDate
+- Integer salary
+- java.time.LocalDateTime startDate
+- java.time.LocalDateTime endDate
+- Status status
+- Person person
++ <<Create>> Worker(long,String,Coordinates,ZonedDateTime,Integer,LocalDateTime,LocalDateTime,Status,Person)
++ long getId()
++ void setId(long)
++ int getSalary()
++ LocalDateTime getEndDate()
++ int compareTo(Worker)
++ String toString()
+}
+class ru.timur.WorkerValidators {
++ {static} String DATE_FORMAT_STRING
++ {static} String TIME_FROMAT_STRING
++ {static} DateTimeFormatter formatter
++ {static} Validator idValidator
++ {static} Validator nameValidator
++ {static} Validator xValidator
++ {static} Validator yValidator
++ {static} Validator localDateValidator
++ {static} Validator zonedlDateValidator
++ {static} Validator salaryValidator
++ {static} Validator statusValidator
++ {static} Validator heightValidator
++ {static} Validator eyeColorValidator
++ {static} Validator nationalityValidator
+}
+abstract class ru.timur.Commands.UserCommand {
+- String name
+- String arguments
+- String description
++ <<Create>> UserCommand(String,String)
++ <<Create>> UserCommand(String,String,String)
++ String getName()
++ String getDescription()
++ {abstract}void execute(String[])
++ {abstract}void validateCommandArgs(String[])
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class ru.timur.Collection.Person {
+- Long height
+- Color eyeColor
+- Country nationality
++ <<Create>> Person(Long,Color,Country)
++ String toString()
+}
+class ru.timur.Commands.ExecuteScriptCommand {
++ <<Create>> ExecuteScriptCommand()
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Controllers.CommandsController {
+- CollectionController collectionController
+- UserIO userIO
+- WorkerReader workerReader
+- HelpCommand helpCommand
+- InfoCommand infoCommand
+- ShowCommand showCommand
+- AddCommand addCommand
+- UpdateByIdCommand updateByIdCommand
+- RemoveByIdCommand removeByIdCommand
+- ClearCommand clearCommand
+- ExitCommand exitCommand
+- RemoveFirstCommand removeFirstCommand
+- RemoveGreaterCommand removeGreaterCommand
+- RemoveLowerCommand removeLowerCommand
+- MinBySalaryCommand minBySalaryCommand
+- FilterLessThanEndDateCommand filterLessThanEndDateCommand
+- PrintFieldDescendingSalaryCommand printFieldDescendingSalaryCommand
+- ArrayList<UserCommand> commandsList
++ <<Create>> CommandsController(UserIO,CollectionController,WorkerReader)
++ ArrayList<UserCommand> getCommandsList()
++ void findAndExecute(String,String[])
+}
+class ru.timur.Commands.RemoveGreaterCommand {
+- WorkerReader workerReader
+- CollectionController collectionController
++ <<Create>> RemoveGreaterCommand(WorkerReader,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Controllers.CollectionController {
+- PriorityQueue<Worker> collection
+- LocalDateTime creationDate
++ <<Create>> CollectionController(PriorityQueue<Worker>)
++ long generateId()
++ PriorityQueue<Worker> getCollection()
++ LocalDateTime getCreationDate()
++ boolean containsId(long)
++ String getInfo()
++ void add(Worker)
++ void update(long,Worker)
++ void removeById(long)
++ void clear()
++ void removeFirst()
++ void removeGreater(Worker)
++ void removeLower(Worker)
++ Worker getMinBySalary()
++ List<Worker> getLessThanEndDate(LocalDateTime)
++ List<Integer> getDescendingSalaries()
+}
+abstract class ru.timur.ValueReader {
+# UserIO userIO
+# boolean scriptMode
++ <<Create>> ValueReader(UserIO)
++ void setScriptMode()
++ void setUserMode()
++ String readValue(String,Validator)
+}
+class ru.timur.Commands.ShowCommand {
+- UserIO userIO
+- CollectionController collectionController
++ <<Create>> ShowCommand(UserIO,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Exceptions.WrongArgumentsException {
++ <<Create>> WrongArgumentsException(String)
+}
+class ru.timur.UserIO {
+- InputStreamReader inputStreamReader
+- OutputStreamWriter outputStreamWriter
++ <<Create>> UserIO(InputStream,OutputStream)
++ void setInputStream(InputStream)
++ void setOutputStream(OutputStream)
++ String readLine()
++ void write(Object)
++ void writeLn(Object)
+}
+class ru.timur.Commands.InfoCommand {
+- UserIO userIO
+- CollectionController collectionController
++ <<Create>> InfoCommand(UserIO,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+enum ru.timur.Collection.Country {
++  UNITED_KINGDOM
++  USA
++  VATICAN
+}
+interface ru.timur.Validator {
+~ void validate(String)
+}
+class ru.timur.Commands.RemoveLowerCommand {
+- WorkerReader workerReader
+- CollectionController collectionController
++ <<Create>> RemoveLowerCommand(WorkerReader,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.WorkerReader {
+- CollectionController collectionController
++ <<Create>> WorkerReader(UserIO,CollectionController)
++ Worker readWorker()
++ long readId()
++ String readName()
++ Coordinates readCoordinates()
++ double readX()
++ double readY()
++ ZonedDateTime readCreationDate()
++ Integer readSalary()
++ LocalDateTime readStartDate()
++ LocalDateTime readEndDate()
++ Status readStatus()
++ Person readPerson()
++ long readHeight()
++ Color readEyeColor()
++ Country readNationality()
+}
+class ru.timur.Commands.FilterLessThanEndDateCommand {
+- UserIO userIO
+- WorkerReader workerReader
+- CollectionController collectionController
++ <<Create>> FilterLessThanEndDateCommand(UserIO,WorkerReader,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Commands.HelpCommand {
+- CommandsController controller
+- UserIO userIO
++ <<Create>> HelpCommand(UserIO,CommandsController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+enum ru.timur.Collection.Color {
++  RED
++  BLUE
++  YELLOW
++  BROWN
+}
+class ru.timur.Commands.UpdateByIdCommand {
+- WorkerReader workerReader
+- CollectionController collectionController
++ <<Create>> UpdateByIdCommand(WorkerReader,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Commands.AddCommand {
+- CollectionController collectionController
+- WorkerReader workerReader
++ <<Create>> AddCommand(WorkerReader,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Commands.ExitCommand {
++ <<Create>> ExitCommand()
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Commands.PrintFieldDescendingSalaryCommand {
+- UserIO userIO
+- CollectionController collectionController
++ <<Create>> PrintFieldDescendingSalaryCommand(UserIO,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Commands.MinBySalaryCommand {
+- UserIO userIO
+- CollectionController collectionController
++ <<Create>> MinBySalaryCommand(UserIO,CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Exceptions.FieldInputException {
++ <<Create>> FieldInputException(String)
+}
+class ru.timur.Collection.Coordinates {
+- double x
+- double y
++ <<Create>> Coordinates(double,double)
++ String toString()
+}
+class ru.timur.Commands.SaveCommand {
++ <<Create>> SaveCommand()
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Commands.ClearCommand {
+- CollectionController collectionController
++ <<Create>> ClearCommand(CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Commands.RemoveByIdCommand {
+- CollectionController collectionController
++ <<Create>> RemoveByIdCommand(CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+class ru.timur.Commands.RemoveFirstCommand {
+- CollectionController collectionController
++ <<Create>> RemoveFirstCommand(CollectionController)
++ void execute(String[])
++ void validateCommandArgs(String[])
+}
+
+
+ru.timur.Collection.Comparable <|.. ru.timur.Collection.Worker
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.ExecuteScriptCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.RemoveGreaterCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.ShowCommand
+ru.timur.Exceptions.Exception <|-- ru.timur.Exceptions.WrongArgumentsException
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.InfoCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.RemoveLowerCommand
+ru.timur.ValueReader <|-- ru.timur.WorkerReader
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.FilterLessThanEndDateCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.HelpCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.UpdateByIdCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.AddCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.ExitCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.PrintFieldDescendingSalaryCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.MinBySalaryCommand
+java.io.IOException <|-- ru.timur.Exceptions.FieldInputException
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.SaveCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.ClearCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.RemoveByIdCommand
+ru.timur.Commands.UserCommand <|-- ru.timur.Commands.RemoveFirstCommand
+@enduml
