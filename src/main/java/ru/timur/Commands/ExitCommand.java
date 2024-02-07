@@ -1,6 +1,6 @@
 package ru.timur.Commands;
 
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 
 public class ExitCommand extends UserCommand {
@@ -10,7 +10,7 @@ public class ExitCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws FieldInputException {
+    public void execute(String[] commandArgs) throws InvalidDataException {
         System.exit(0);
     }
 

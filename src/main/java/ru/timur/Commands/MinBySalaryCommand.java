@@ -1,7 +1,7 @@
 package ru.timur.Commands;
 
 import ru.timur.Controllers.CollectionController;
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 import ru.timur.UI.UserIO;
 
@@ -17,7 +17,7 @@ public class MinBySalaryCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws FieldInputException {
+    public void execute(String[] commandArgs) throws InvalidDataException {
         if(this.collectionController.getCollection().isEmpty()){
             throw new NoSuchElementException("Collection is empty!");
         }

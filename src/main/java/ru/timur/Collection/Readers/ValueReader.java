@@ -1,8 +1,9 @@
 package ru.timur.Collection.Readers;
 
+import ru.timur.Parsers.Parser;
 import ru.timur.Validators.Validator;
 import ru.timur.Constants;
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.UI.UserIO;
 
 public abstract class ValueReader {
@@ -10,22 +11,22 @@ public abstract class ValueReader {
     public ValueReader(UserIO userIO){
         this.userIO = userIO;
     }
-    public String readValue(String valueName, Validator validator) throws FieldInputException {
-        String s;
+    public Object readValue(String valueName, Validator validator, Parser parser) throws InvalidDataException {
+        Object value;
         while (true) {
             if(!Constants.SCRIPT_MODE) this.userIO.print("Enter " + valueName + ": ");
-            s = this.userIO.readLine().trim();
+            String s = this.userIO.readLine().trim();
             try {
-                validator.validate(s);
+                value = parser.parse(s);
+                validator.validate(value);
                 break;
-            } catch (FieldInputException e){
+            } catch (InvalidDataException e){
                 if(Constants.SCRIPT_MODE) throw e;
                 else{
                     userIO.printLn(e.getMessage());
                 }
-
             }
         }
-        return s;
+        return value;
     }
 }

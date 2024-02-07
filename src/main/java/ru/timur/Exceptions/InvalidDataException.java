@@ -1,6 +1,8 @@
 package ru.timur.Exceptions;
 
-public class InvalidDataException extends Exception{
+import java.io.IOException;
+
+public class InvalidDataException extends IOException {
     public InvalidDataException(String message){
         super(message);
     }

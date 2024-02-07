@@ -1,7 +1,7 @@
 package ru.timur.Commands;
 
 import ru.timur.Controllers.CollectionController;
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 import ru.timur.UI.UserIO;
 
@@ -15,7 +15,7 @@ public class PrintFieldDescendingSalaryCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws FieldInputException {
+    public void execute(String[] commandArgs) throws InvalidDataException {
         this.userIO.printLn(this.collectionController.getDescendingSalaries());
     }
 

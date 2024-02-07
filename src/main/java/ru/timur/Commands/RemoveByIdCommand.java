@@ -1,7 +1,7 @@
 package ru.timur.Commands;
 
 import ru.timur.Controllers.CollectionController;
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 import ru.timur.Validators.WorkerValidators;
 
@@ -16,7 +16,7 @@ public class RemoveByIdCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws FieldInputException {
+    public void execute(String[] commandArgs) throws InvalidDataException {
         this.collectionController.removeById(Long.parseLong(commandArgs[0]));
     }
 
@@ -27,7 +27,7 @@ public class RemoveByIdCommand extends UserCommand {
         }
         try {
             WorkerValidators.idValidator.validate(commandArgs[0]);
-        } catch (FieldInputException e) {
+        } catch (InvalidDataException e) {
             throw new WrongArgumentsException("Wrong arguments format!");
         }
         if (!this.collectionController.containsId(Long.parseLong(commandArgs[0]))) {

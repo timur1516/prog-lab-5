@@ -2,7 +2,6 @@ package ru.timur.Commands;
 
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Controllers.FileController;
-import ru.timur.Exceptions.FieldInputException;
 import ru.timur.Exceptions.WrongArgumentsException;
 
 import java.io.IOException;

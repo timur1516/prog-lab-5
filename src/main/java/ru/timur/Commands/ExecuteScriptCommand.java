@@ -1,7 +1,6 @@
 package ru.timur.Commands;
 
 import ru.timur.Constants;
-import ru.timur.Exceptions.FieldInputException;
 import ru.timur.Exceptions.WrongArgumentsException;
 import ru.timur.Main;
 import ru.timur.UI.UserIO;

@@ -5,7 +5,7 @@ import ru.timur.Constants;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
-public class Worker implements Comparable<Worker>{
+public class Worker implements Comparable<Worker> {
     /**
      * Worker's id,
      * Must be greater than zero,
@@ -83,7 +83,7 @@ public class Worker implements Comparable<Worker>{
     public void setId(long id) {
         this.id = id;
     }
-    public int getSalary() {
+    public Integer getSalary() {
         return this.salary;
     }
     public LocalDateTime getEndDate(){

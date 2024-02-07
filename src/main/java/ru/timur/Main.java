@@ -6,7 +6,6 @@ import ru.timur.Commands.UserCommand;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Controllers.CommandsController;
 import ru.timur.Controllers.FileController;
-import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.UI.*;
 
 import java.io.*;

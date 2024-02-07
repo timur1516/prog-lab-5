@@ -1,7 +1,7 @@
 package ru.timur.Commands;
 
 import ru.timur.Controllers.CollectionController;
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 
 import java.util.NoSuchElementException;
@@ -14,7 +14,7 @@ public class RemoveFirstCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws FieldInputException, NoSuchElementException {
+    public void execute(String[] commandArgs) throws InvalidDataException, NoSuchElementException {
         if(this.collectionController.getCollection().isEmpty()){
             throw new NoSuchElementException("Collection is empty!");
         }

@@ -1,7 +1,7 @@
 package ru.timur.Commands;
 
 import ru.timur.Controllers.CollectionController;
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 import ru.timur.UI.UserIO;
 import ru.timur.Collection.Readers.WorkerReader;
@@ -20,7 +20,7 @@ public class FilterLessThanEndDateCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws FieldInputException {
+    public void execute(String[] commandArgs) throws InvalidDataException {
         this.userIO.printLn(this.collectionController.getLessThanEndDate((LocalDateTime) data));
     }
 
@@ -30,7 +30,7 @@ public class FilterLessThanEndDateCommand extends UserCommand {
     }
 
     @Override
-    public void readData() throws FieldInputException {
+    public void readData() throws InvalidDataException {
         this.data = this.workerReader.readEndDate();
     }
 }

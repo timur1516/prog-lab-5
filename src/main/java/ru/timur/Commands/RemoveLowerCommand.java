@@ -2,7 +2,7 @@ package ru.timur.Commands;
 
 import ru.timur.Collection.Worker;
 import ru.timur.Controllers.CollectionController;
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 import ru.timur.Collection.Readers.WorkerReader;
 
@@ -16,7 +16,7 @@ public class RemoveLowerCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws FieldInputException {
+    public void execute(String[] commandArgs) throws InvalidDataException {
         this.collectionController.removeLower((Worker) data);
     }
 
@@ -26,7 +26,7 @@ public class RemoveLowerCommand extends UserCommand {
     }
 
     @Override
-    public void readData() throws FieldInputException {
+    public void readData() throws InvalidDataException {
         this.data = this.workerReader.readWorker();
     }
 }

@@ -10,11 +10,11 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 public class ZonedDateTimeDeserializer implements JsonDeserializer<ZonedDateTime> {
     @Override
-    public ZonedDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
-        return ZonedDateTime.of(LocalDateTime.parse(json.getAsString(), Constants.formatter), ZoneId.of("Europe/Moscow"));
+    public ZonedDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        return ZonedDateTime.of(LocalDateTime.parse(jsonElement.getAsString(), Constants.formatter), ZoneId.of("Europe/Moscow"));
     }
 }

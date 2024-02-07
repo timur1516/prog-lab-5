@@ -2,7 +2,6 @@ package ru.timur.Controllers;
 
 import ru.timur.Collection.Worker;
 import ru.timur.Constants;
-import ru.timur.Exceptions.FieldInputException;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Validators.WorkerValidators;
 
@@ -43,16 +42,8 @@ public class CollectionController {
         if(idSet.size() != collection.size()) return false;
         for(Worker worker : collection){
             try {
-                WorkerValidators.idValidator.validate(String.valueOf(worker.getId()));
-                WorkerValidators.nameValidator.validate(String.valueOf(worker.getName()));
-                WorkerValidators.xValidator.validate(String.valueOf(worker.getCoordinates().getX()));
-                WorkerValidators.yValidator.validate(String.valueOf(worker.getCoordinates().getY()));
-                WorkerValidators.salaryValidator.validate(String.valueOf(worker.getSalary()));
-                WorkerValidators.statusValidator.validate(String.valueOf(worker.getStatus()));
-                WorkerValidators.heightValidator.validate(String.valueOf(worker.getPerson().getHeight()));
-                WorkerValidators.eyeColorValidator.validate(String.valueOf(worker.getPerson().getEyeColor()));
-                WorkerValidators.nationalityValidator.validate(String.valueOf(worker.getPerson().getNationality()));
-            } catch (FieldInputException e){
+                WorkerValidators.workerValidator.validate(worker);
+            } catch (InvalidDataException e){
                 return false;
             }
         }

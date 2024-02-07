@@ -1,12 +1,11 @@
 package ru.timur.Controllers;
 
 import ru.timur.Commands.*;
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 import ru.timur.UI.UserIO;
 import ru.timur.Collection.Readers.WorkerReader;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -81,9 +80,9 @@ public class CommandsController {
      * @return UserCommand
      * @throws WrongArgumentsException if wrong arguments given
      * @throws NoSuchElementException if there is no such command found
-     * @throws FieldInputException if error while reading data element happened (used for scriptMode)
+     * @throws InvalidDataException if error while reading data element happened (used for scriptMode)
      */
-    public UserCommand launchCommand(String commandName, String[] commandArgs) throws WrongArgumentsException, NoSuchElementException, FieldInputException {
+    public UserCommand launchCommand(String commandName, String[] commandArgs) throws WrongArgumentsException, NoSuchElementException, InvalidDataException {
         if(!this.commandsList.stream().anyMatch(userCommand -> userCommand.getName().equals(commandName))){
             throw new NoSuchElementException("Command '" + commandName + "' not found!");
         }

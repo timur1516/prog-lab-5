@@ -1,6 +1,6 @@
 package ru.timur.Commands;
 
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
 
 import java.io.IOException;
@@ -41,7 +41,7 @@ public abstract class UserCommand {
     /**
      * This method completes action which command must do
      * @param commandArgs list of command arguments
-     * @throws FieldInputException if error while reading input values is occurred (useful in script mode)
+     * @throws InvalidDataException if error while reading input values is occurred (useful in script mode)
      */
     public abstract void execute(String[] commandArgs) throws IOException;
 
@@ -53,7 +53,7 @@ public abstract class UserCommand {
      */
     public abstract void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException;
 
-    public void readData() throws FieldInputException {
+    public void readData() throws InvalidDataException {
         this.data = null;
     }
 

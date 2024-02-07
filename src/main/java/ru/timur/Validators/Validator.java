@@ -1,8 +1,8 @@
 package ru.timur.Validators;
 
-import ru.timur.Exceptions.FieldInputException;
+import ru.timur.Exceptions.InvalidDataException;
 
 @FunctionalInterface
 public interface Validator {
-    void validate(String s) throws FieldInputException;
+    void validate(Object value) throws InvalidDataException;
 }

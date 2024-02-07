@@ -1,14 +1,14 @@
 [
   {
-    "id": 1,
-    "name": "name1",
+    "id": 5,
+    "name": "snd",
     "coordinates": {
-      "x": 1.0,
+      "x": 0.5,
       "y": 5.0
     },
-    "creationDate": "06.02.2024 17:29",
-    "salary": 46,
-    "startDate": "01.02.2021",
+    "creationDate": "01.02.2023 15:30",
+    "salary": 54,
+    "startDate": "01.02.2025",
     "endDate": "02.05.5213",
     "status": "HIRED",
     "person": {
