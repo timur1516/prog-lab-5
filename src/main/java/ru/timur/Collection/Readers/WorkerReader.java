@@ -6,15 +6,14 @@ import ru.timur.Validators.WorkerValidators;
 import ru.timur.Constants;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
-import ru.timur.UI.UserIO;
+import ru.timur.UI.Console;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 public class WorkerReader extends ValueReader {
     private CollectionController collectionController;
-    public WorkerReader(UserIO userIO, CollectionController collectionController) {
-        super(userIO);
+    public WorkerReader(CollectionController collectionController) {
         this.collectionController = collectionController;
     }
 
@@ -52,7 +51,7 @@ public class WorkerReader extends ValueReader {
     }
 
     public ZonedDateTime readCreationDate() throws InvalidDataException {
-        return (ZonedDateTime) readValue("creation date", WorkerValidators.zonedlDateValidator, WorkerParsers.zonedlDateTimeParser);
+        return (ZonedDateTime) readValue("creation date", WorkerValidators.creationDateValidator, WorkerParsers.zonedlDateTimeParser);
     }
 
     public Integer readSalary() throws InvalidDataException {
@@ -60,18 +59,18 @@ public class WorkerReader extends ValueReader {
     }
 
     public LocalDateTime readStartDate() throws InvalidDataException {
-        return (LocalDateTime) readValue("start date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.localDateValidator, WorkerParsers.localDateTimeParser);
+        return (LocalDateTime) readValue("start date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.startDateValidator, WorkerParsers.localDateTimeParser);
     }
 
     public LocalDateTime readEndDate() throws InvalidDataException {
-        return (LocalDateTime) readValue("end date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.localDateValidator, WorkerParsers.localDateTimeParser);
+        return (LocalDateTime) readValue("end date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.endDateValidator, WorkerParsers.localDateTimeParser);
     }
 
     public Status readStatus() throws InvalidDataException {
         if(!Constants.SCRIPT_MODE) {
-            userIO.printLn("List of possible status values:");
+            Console.getInstance().printLn("List of possible status values:");
             for (Status i : Status.values()) {
-                userIO.printLn(i);
+                Console.getInstance().printLn(i);
             }
         }
         return (Status) readValue("status", WorkerValidators.statusValidator, WorkerParsers.statusParser);
@@ -80,22 +79,22 @@ public class WorkerReader extends ValueReader {
         return new Person(readHeight(), readEyeColor(), readNationality());
     }
     public long readHeight() throws InvalidDataException {
-        return (long) readValue("height", WorkerValidators.heightValidator, WorkerParsers.longParser);
+        return (long) readValue("height or press ENTER if there is no person", WorkerValidators.heightValidator, WorkerParsers.longParser);
     }
     public Color readEyeColor() throws InvalidDataException {
         if(!Constants.SCRIPT_MODE) {
-            userIO.printLn("List of possible eye color values:");
+            Console.getInstance().printLn("List of possible eye color values:");
             for (Color i : Color.values()) {
-                userIO.printLn(i);
+                Console.getInstance().printLn(i);
             }
         }
         return (Color) readValue("eye color", WorkerValidators.eyeColorValidator, WorkerParsers.eyeColorParser);
     }
     public Country readNationality() throws InvalidDataException {
         if(!Constants.SCRIPT_MODE) {
-            userIO.printLn("List of possible nationality values:");
+            Console.getInstance().printLn("List of possible nationality values:");
             for (Country i : Country.values()) {
-                userIO.printLn(i);
+                Console.getInstance().printLn(i);
             }
         }
         return (Country) readValue("nationality", WorkerValidators.nationalityValidator, WorkerParsers.nationalityParser);

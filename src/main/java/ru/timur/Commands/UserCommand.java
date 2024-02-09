@@ -43,7 +43,7 @@ public abstract class UserCommand {
      * @param commandArgs list of command arguments
      * @throws InvalidDataException if error while reading input values is occurred (useful in script mode)
      */
-    public abstract void execute(String[] commandArgs) throws IOException;
+    public abstract void execute(String[] commandArgs) throws IOException, WrongArgumentsException;
 
     /**
      * This method check if command argument are correct

@@ -1,23 +1,5 @@
 [
   {
-    "id": 5,
-    "name": "snd",
-    "coordinates": {
-      "x": 0.5,
-      "y": 5.0
-    },
-    "creationDate": "01.02.2023 15:30",
-    "salary": 54,
-    "startDate": "01.02.2025",
-    "endDate": "02.05.5213",
-    "status": "HIRED",
-    "person": {
-      "height": 151123,
-      "eyeColor": "BLUE",
-      "nationality": "USA"
-    }
-  },
-  {
     "id": 2,
     "name": "name2",
     "coordinates": {
@@ -27,12 +9,26 @@
     "creationDate": "06.02.2024 17:29",
     "salary": 2,
     "startDate": "01.02.2021",
-    "endDate": "02.05.5213",
+    "endDate": null,
     "status": "FIRED",
+    "person": null
+  },
+  {
+    "id": 5,
+    "name": "snd",
+    "coordinates": {
+      "x": 0.5,
+      "y": 5.0
+    },
+    "creationDate": "01.02.2023 15:30",
+    "salary": 54,
+    "startDate": "01.02.2025",
+    "endDate": "01.02.2026",
+    "status": "HIRED",
     "person": {
-      "height": 265,
-      "eyeColor": "RED",
-      "nationality": "VATICAN"
+      "height": 151123,
+      "eyeColor": "BLUE",
+      "nationality": "USA"
     }
   }
 ]

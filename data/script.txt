@@ -2,7 +2,7 @@ info
 add
 name3
 5
-1
+5
 2
 01.02.2021
 01.02.2022
@@ -10,7 +10,6 @@ FIRED
 125
 RED
 VATICAN
-remove_by_id 1
 show
+execute_script C:\Users\hache\IdeaProjects\Lab5\data\script1.txt
 clear
-remove_first

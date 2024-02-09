@@ -3,7 +3,6 @@ package ru.timur.Controllers;
 import ru.timur.Commands.*;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
-import ru.timur.UI.UserIO;
 import ru.timur.Collection.Readers.WorkerReader;
 
 import java.util.ArrayList;
@@ -30,23 +29,23 @@ public class CommandsController {
 
     private final ArrayList<UserCommand> commandsList;
 
-    public CommandsController(UserIO userIO, CollectionController collectionController, WorkerReader workerReader, FileController fileController){
-        this.helpCommand = new HelpCommand(userIO, this);
-        this.infoCommand = new InfoCommand(userIO, collectionController);
-        this.showCommand = new ShowCommand(userIO, collectionController);
+    public CommandsController(CollectionController collectionController, WorkerReader workerReader, FileController fileController){
+        this.helpCommand = new HelpCommand(this);
+        this.infoCommand = new InfoCommand(collectionController);
+        this.showCommand = new ShowCommand(collectionController);
         this.addCommand = new AddCommand(workerReader, collectionController);
         this.updateByIdCommand = new UpdateByIdCommand(workerReader, collectionController);
         this.removeByIdCommand = new RemoveByIdCommand(collectionController);
         this.clearCommand = new ClearCommand(collectionController);
         this.saveCommand = new SaveCommand(collectionController, fileController);
-        this.executeScriptCommand = new ExecuteScriptCommand(userIO);
+        this.executeScriptCommand = new ExecuteScriptCommand();
         this.exitCommand = new ExitCommand();
         this.removeFirstCommand = new RemoveFirstCommand(collectionController);
         this.removeGreaterCommand = new RemoveGreaterCommand(workerReader, collectionController);
         this.removeLowerCommand = new RemoveLowerCommand(workerReader, collectionController);
-        this.minBySalaryCommand = new MinBySalaryCommand(userIO, collectionController);
-        this.filterLessThanEndDateCommand = new FilterLessThanEndDateCommand(userIO, workerReader, collectionController);
-        this.printFieldDescendingSalaryCommand = new PrintFieldDescendingSalaryCommand(userIO, collectionController);
+        this.minBySalaryCommand = new MinBySalaryCommand(collectionController);
+        this.filterLessThanEndDateCommand = new FilterLessThanEndDateCommand(workerReader, collectionController);
+        this.printFieldDescendingSalaryCommand = new PrintFieldDescendingSalaryCommand(collectionController);
 
         this.commandsList  = new ArrayList<>(Arrays.asList(
                 helpCommand,

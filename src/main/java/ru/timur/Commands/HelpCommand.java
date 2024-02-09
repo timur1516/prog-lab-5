@@ -2,21 +2,19 @@ package ru.timur.Commands;
 
 import ru.timur.Controllers.CommandsController;
 import ru.timur.Exceptions.WrongArgumentsException;
-import ru.timur.UI.UserIO;
+import ru.timur.UI.Console;
 
 public class HelpCommand extends UserCommand {
     private CommandsController controller;
-    private UserIO userIO;
-    public HelpCommand(UserIO userIO, CommandsController controller) {
+    public HelpCommand(CommandsController controller) {
         super("help", "print description of available commands");
         this.controller = controller;
-        this.userIO = userIO;
     }
 
     @Override
     public void execute(String[] commandArgs) {
         this.controller.getCommandsList()
-                .forEach(command -> this.userIO.printLn(command));
+                .forEach(command -> Console.getInstance().printLn(command));
     }
 
     @Override

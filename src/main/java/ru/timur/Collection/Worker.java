@@ -4,6 +4,7 @@ import ru.timur.Constants;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 public class Worker implements Comparable<Worker> {
     /**
@@ -97,19 +98,26 @@ public class Worker implements Comparable<Worker> {
 
     @Override
     public String toString() {
-        return "Worker{" +
-                "\nid=" + id +
-                ",\nname='" + name + '\'' +
-                ",\ncoordinates=" + coordinates +
-                ",\ncreationDate=" + creationDate.format(Constants.formatter) +
-                ",\nsalary=" + salary +
-                ",\nstartDate=" + startDate.toLocalDate().format(Constants.formatter) +
-                ",\nendDate=" + endDate.toLocalDate().format(Constants.formatter) +
-                ",\nstatus=" + status +
-                ",\nperson=" + person +
-                "\n}";
-    }
+        return "Worker [id = " + id + "]:\n" +
+                "\tname: '" + name + "\'\n" +
 
+                "\tcoordinates:\n" +
+                (Objects.isNull(coordinates) ? "\t\tnull" :
+                "\t\tx: " + coordinates.getX() + "\n" +
+                "\t\ty: " + coordinates.getY()) + "\n" +
+
+                "\tcreationDate: " + creationDate.format(Constants.formatter) + "\n" +
+                "\tsalary: " + salary + "\n" +
+                "\tstartDate: " + startDate.toLocalDate().format(Constants.formatter) + "\n" +
+                "\tendDate: " + (!Objects.isNull(endDate) ? endDate.toLocalDate().format(Constants.formatter) : null) + "\n" +
+                "\tstatus: " + status + "\n" +
+
+                "\tperson:\n" +
+                (Objects.isNull(person) ? "\t\tnull" :
+                "\t\theight: " + person.getHeight() + "\n" +
+                "\t\teyeColor: " + person.getEyeColor() + "\n" +
+                "\t\tnationality: " + person.getNationality());
+    }
     public String getName() {
         return name;
     }

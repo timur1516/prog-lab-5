@@ -1,12 +1,10 @@
 package ru.timur.Validators;
 
 import ru.timur.Collection.*;
-import ru.timur.Constants;
 import ru.timur.Exceptions.InvalidDataException;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeParseException;
 
 public class WorkerValidators {
     public static Validator workerValidator = new Validator() {
@@ -16,10 +14,10 @@ public class WorkerValidators {
             idValidator.validate(((Worker) value).getId());
             nameValidator.validate(((Worker) value).getName());
             coordinatesValidator.validate(((Worker) value).getCoordinates());
-            zonedlDateValidator.validate(((Worker) value).getCreationDate());
+            creationDateValidator.validate(((Worker) value).getCreationDate());
             salaryValidator.validate(((Worker) value).getSalary());
-            localDateValidator.validate(((Worker) value).getStartDate());
-            localDateValidator.validate(((Worker) value).getEndDate());
+            startDateValidator.validate(((Worker) value).getStartDate());
+            endDateValidator.validate(((Worker) value).getEndDate());
             statusValidator.validate(((Worker) value).getStatus());
             personValidator.validate(((Worker) value).getPerson());
         }
@@ -60,13 +58,20 @@ public class WorkerValidators {
             if(!(value instanceof Double)) throw new InvalidDataException("Wrong type!");
         }
     };
-    public static Validator localDateValidator = new Validator() {
+    public static Validator startDateValidator = new Validator() {
         @Override
         public void validate(Object value) throws InvalidDataException {
             if(!(value instanceof LocalDateTime)) throw new InvalidDataException("Wrong type!");
         }
     };
-    public static Validator zonedlDateValidator = new Validator() {
+    public static Validator endDateValidator = new Validator() {
+        @Override
+        public void validate(Object value) throws InvalidDataException {
+            if(value == null) return;
+            if(!(value instanceof LocalDateTime)) throw new InvalidDataException("Wrong type!");
+        }
+    };
+    public static Validator creationDateValidator = new Validator() {
         @Override
         public void validate(Object value) throws InvalidDataException {
             if(!(value instanceof ZonedDateTime)) throw new InvalidDataException("Wrong type!");
@@ -88,6 +93,7 @@ public class WorkerValidators {
     public static Validator personValidator = new Validator() {
         @Override
         public void validate(Object value) throws InvalidDataException {
+            if(value == null) return;
             if(!(value instanceof Person)) throw new InvalidDataException("Wrong type!");
             heightValidator.validate(((Person) value).getHeight());
             eyeColorValidator.validate(((Person) value).getEyeColor());
@@ -104,12 +110,14 @@ public class WorkerValidators {
     public static Validator eyeColorValidator = new Validator() {
         @Override
         public void validate(Object value) throws InvalidDataException {
+            if(value == null) return;
             if(!(value instanceof Color)) throw new InvalidDataException("Wrong type!");
         }
     };
     public static Validator nationalityValidator = new Validator() {
         @Override
         public void validate(Object value) throws InvalidDataException {
+            if(value == null) return;
             if(!(value instanceof Country)) throw new InvalidDataException("Wrong type!");
         }
     };

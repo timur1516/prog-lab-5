@@ -28,7 +28,7 @@ public class FileController {
         gsonBuilder.registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeSerializer());
         gsonBuilder.registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeDeserializer());
 
-        this.gson = gsonBuilder.setPrettyPrinting().create();
+        this.gson = gsonBuilder.serializeNulls().setPrettyPrinting().create();
     }
     private  boolean isValidPath(String path){
         File f = new File(path);

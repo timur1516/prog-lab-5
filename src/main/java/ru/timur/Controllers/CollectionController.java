@@ -175,7 +175,7 @@ public class CollectionController {
     public List<Worker> getLessThanEndDate(LocalDateTime endDate){
         return this.collection
                 .stream()
-                .filter(worker1 -> worker1.getEndDate().isBefore(endDate))
+                .filter(worker1 -> (!Objects.isNull(worker1.getEndDate()) && worker1.getEndDate().isBefore(endDate)))
                 .toList();
     }
 

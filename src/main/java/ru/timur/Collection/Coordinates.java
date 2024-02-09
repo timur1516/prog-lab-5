@@ -24,10 +24,9 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return "Coordinates{" +
-                "\nx=" + x +
-                ",\ny=" + y +
-                "\n}";
+        return "Coordinates:\n" +
+                "\tx: " + x + "\n" +
+                "\ty: " + y + "\n";
     }
 
     public double getX() {

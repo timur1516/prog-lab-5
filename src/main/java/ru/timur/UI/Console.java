@@ -3,17 +3,22 @@ package ru.timur.UI;
 import java.io.*;
 import java.util.Scanner;
 
-public class UserIO{
+public class Console {
+    private static Console CONSOLE;
     private Scanner scanner;
-
-    public UserIO(InputStream inputStream){
-        setInputStream(inputStream);
+    private Console(){}
+    public static Console getInstance(){
+        if(CONSOLE == null){
+            CONSOLE = new Console();
+        }
+        return CONSOLE;
     }
-
-    public void setInputStream(InputStream inputStream) {
-        this.scanner = new Scanner(inputStream);
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
     }
-
+    public Scanner getScanner() {
+        return scanner;
+    }
     public String readLine(){
         return scanner.nextLine();
     }

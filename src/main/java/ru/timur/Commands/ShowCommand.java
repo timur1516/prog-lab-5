@@ -3,25 +3,23 @@ package ru.timur.Commands;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongArgumentsException;
-import ru.timur.UI.UserIO;
+import ru.timur.UI.Console;
 
 public class ShowCommand extends UserCommand {
-    private UserIO userIO;
     private CollectionController collectionController;
-    public ShowCommand(UserIO userIO, CollectionController collectionController) {
+    public ShowCommand(CollectionController collectionController) {
         super("show", "print all elements of collection");
-        this.userIO = userIO;
         this.collectionController = collectionController;
     }
 
     @Override
     public void execute(String[] commandArgs) throws InvalidDataException {
         if(this.collectionController.getCollection().isEmpty()){
-            this.userIO.printLn("Collection is empty");
+            Console.getInstance().printLn("Collection is empty");
         }
         else {
             this.collectionController.getCollection()
-                    .forEach(worker -> this.userIO.printLn(worker));
+                    .forEach(worker -> Console.getInstance().printLn(worker));
         }
     }
 

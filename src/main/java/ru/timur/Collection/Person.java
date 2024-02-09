@@ -33,11 +33,10 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "\nheight=" + height +
-                ",\neyeColor=" + eyeColor +
-                ",\nnationality=" + nationality +
-                "\n}";
+        return "Person:\n" +
+                "\theight: " + height + "\n" +
+                "\teyeColor: " + eyeColor + "\n" +
+                "\tnationality: " + nationality + "\n";
     }
 
     public Long getHeight() {
