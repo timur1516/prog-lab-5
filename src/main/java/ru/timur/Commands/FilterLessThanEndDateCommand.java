@@ -2,7 +2,7 @@ package ru.timur.Commands;
 
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
-import ru.timur.Exceptions.WrongArgumentsException;
+import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.UI.Console;
 import ru.timur.Collection.Readers.WorkerReader;
 
@@ -19,16 +19,12 @@ public class FilterLessThanEndDateCommand extends UserCommand {
 
     @Override
     public void execute(String[] commandArgs) throws InvalidDataException {
-        Console.getInstance().printLn(this.collectionController.getLessThanEndDate((LocalDateTime) data));
+        LocalDateTime endDate = workerReader.readEndDate();
+        Console.getInstance().printLn(this.collectionController.getLessThanEndDate(endDate));
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException {
-        if(commandArgs.length != 0) throw new WrongArgumentsException("Wrong amount of arguments!");
-    }
-
-    @Override
-    public void readData() throws InvalidDataException {
-        this.data = this.workerReader.readEndDate();
+    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+        if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

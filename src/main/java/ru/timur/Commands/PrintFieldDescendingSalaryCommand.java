@@ -2,7 +2,7 @@ package ru.timur.Commands;
 
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
-import ru.timur.Exceptions.WrongArgumentsException;
+import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.UI.Console;
 
 public class PrintFieldDescendingSalaryCommand extends UserCommand {
@@ -18,7 +18,7 @@ public class PrintFieldDescendingSalaryCommand extends UserCommand {
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException {
-        if(commandArgs.length != 0) throw new WrongArgumentsException("Wrong amount of arguments!");
+    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+        if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

@@ -79,7 +79,7 @@ public class WorkerReader extends ValueReader {
         return new Person(readHeight(), readEyeColor(), readNationality());
     }
     public long readHeight() throws InvalidDataException {
-        return (long) readValue("height or press ENTER if there is no person", WorkerValidators.heightValidator, WorkerParsers.longParser);
+        return (long) readValue("height", WorkerValidators.heightValidator, WorkerParsers.longParser);
     }
     public Color readEyeColor() throws InvalidDataException {
         if(!Constants.SCRIPT_MODE) {

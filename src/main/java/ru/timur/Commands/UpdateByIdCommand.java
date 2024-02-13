@@ -3,8 +3,9 @@ package ru.timur.Commands;
 import ru.timur.Collection.Worker;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
-import ru.timur.Exceptions.WrongArgumentsException;
+import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.Collection.Readers.WorkerReader;
+import ru.timur.Parsers.WorkerParsers;
 import ru.timur.Validators.WorkerValidators;
 
 import java.util.NoSuchElementException;
@@ -20,24 +21,17 @@ public class UpdateByIdCommand extends UserCommand {
 
     @Override
     public void execute(String[] commandArgs) throws InvalidDataException {
-        this.collectionController.update(Long.parseLong(commandArgs[0]), (Worker) data);
+        Worker worker = this.workerReader.readWorker();
+        this.collectionController.update(Long.parseLong(commandArgs[0]), worker);
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException, NoSuchElementException {
-        if (commandArgs.length != 1) throw new WrongArgumentsException("Wrong amount of arguments!");
-        try {
-            WorkerValidators.idValidator.validate(commandArgs[0]);
-        } catch (InvalidDataException e) {
-            throw new WrongArgumentsException("Wrong arguments format!");
-        }
+    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException, InvalidDataException {
+        if (commandArgs.length != 1) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 1, commandArgs.length);
+        long id = (Long) WorkerParsers.longParser.parse(commandArgs[0]);
+        WorkerValidators.idValidator.validate(id);
         if (!this.collectionController.containsId(Long.parseLong(commandArgs[0]))) {
             throw new NoSuchElementException("No element with such id!");
         }
-    }
-
-    @Override
-    public void readData() throws InvalidDataException {
-        this.data = this.workerReader.readWorker();
     }
 }

@@ -3,7 +3,7 @@ package ru.timur.Commands;
 import ru.timur.Collection.Worker;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
-import ru.timur.Exceptions.WrongArgumentsException;
+import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.Collection.Readers.WorkerReader;
 
 public class AddCommand extends UserCommand {
@@ -17,16 +17,12 @@ public class AddCommand extends UserCommand {
 
     @Override
     public void execute(String[] commandArgs) throws InvalidDataException {
-        collectionController.add((Worker) this.data);
+        Worker worker = this.workerReader.readWorker();
+        collectionController.add(worker);
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException {
-        if(commandArgs.length != 0) throw new WrongArgumentsException("Wrong amount of arguments!");
-    }
-
-    @Override
-    public void readData() throws InvalidDataException {
-        this.data = this.workerReader.readWorker();
+    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+        if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

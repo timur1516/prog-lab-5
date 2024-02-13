@@ -3,6 +3,7 @@ package ru.timur;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.util.Stack;
 
 public class Constants {
     public static boolean SCRIPT_MODE = false;
@@ -16,4 +17,5 @@ public class Constants {
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
             .toFormatter();
+    public static Stack<String> scriptStack = new Stack<>();
 }

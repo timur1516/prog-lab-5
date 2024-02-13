@@ -1,7 +1,7 @@
 package ru.timur.Commands;
 
 import ru.timur.Exceptions.InvalidDataException;
-import ru.timur.Exceptions.WrongArgumentsException;
+import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 
 public class ExitCommand extends UserCommand {
 
@@ -15,9 +15,9 @@ public class ExitCommand extends UserCommand {
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException {
+    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0){
-            throw new WrongArgumentsException("Wrong amount of arguments!");
+            throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
         }
     }
 }

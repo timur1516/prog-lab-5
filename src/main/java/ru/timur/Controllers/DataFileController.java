@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.PriorityQueue;
 
-public class FileController {
+public class DataFileController {
     private final String fileName;
     private final Gson gson;
-    public FileController(String fileName) throws FileNotFoundException {
+    public DataFileController(String fileName) throws FileNotFoundException {
         if(!isValidPath(fileName)){
             throw new FileNotFoundException();
         }

@@ -1,8 +1,10 @@
 package ru.timur.Commands;
 
 import ru.timur.Exceptions.InvalidDataException;
-import ru.timur.Exceptions.WrongArgumentsException;
+import ru.timur.Exceptions.RecursiveScriptException;
+import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -20,7 +22,6 @@ public abstract class UserCommand {
      */
     private final String description;
 
-    protected Object data;
     public UserCommand(String name, String description){
         this.name = name;
         this.arguments = "";
@@ -34,28 +35,20 @@ public abstract class UserCommand {
     public String getName(){
         return this.name;
     }
-    public String getDescription(){
-        return this.description;
-    }
 
     /**
      * This method completes action which command must do
      * @param commandArgs list of command arguments
      * @throws InvalidDataException if error while reading input values is occurred (useful in script mode)
      */
-    public abstract void execute(String[] commandArgs) throws IOException, WrongArgumentsException;
+    public abstract void execute(String[] commandArgs) throws IOException, RecursiveScriptException;
 
     /**
      * This method check if command argument are correct
      * Method checks if amount of arguments is correct and if their type is correct
      * @param commandArgs list of command arguments
-     * @throws WrongArgumentsException if arguments are wrong
      */
-    public abstract void validateCommandArgs(String[] commandArgs) throws WrongArgumentsException;
-
-    public void readData() throws InvalidDataException {
-        this.data = null;
-    }
+    public abstract void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException, InvalidDataException, FileNotFoundException, RecursiveScriptException;
 
     @Override
     public boolean equals(Object o) {
