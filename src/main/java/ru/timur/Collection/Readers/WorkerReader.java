@@ -2,6 +2,7 @@ package ru.timur.Collection.Readers;
 
 import ru.timur.Collection.*;
 import ru.timur.Parsers.WorkerParsers;
+import ru.timur.UI.YesNoQuestionAsker;
 import ru.timur.Validators.WorkerValidators;
 import ru.timur.Constants;
 import ru.timur.Controllers.CollectionController;
@@ -63,6 +64,8 @@ public class WorkerReader extends ValueReader {
     }
 
     public LocalDateTime readEndDate() throws InvalidDataException {
+        YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Does worker has end date?");
+        if(!questionAsker.ask()) return null;
         return (LocalDateTime) readValue("end date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.endDateValidator, WorkerParsers.localDateTimeParser);
     }
 
@@ -76,12 +79,16 @@ public class WorkerReader extends ValueReader {
         return (Status) readValue("status", WorkerValidators.statusValidator, WorkerParsers.statusParser);
     }
     public Person readPerson() throws InvalidDataException {
+        YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Does worker has person?");
+        if(!questionAsker.ask()) return null;
         return new Person(readHeight(), readEyeColor(), readNationality());
     }
     public long readHeight() throws InvalidDataException {
         return (long) readValue("height", WorkerValidators.heightValidator, WorkerParsers.longParser);
     }
     public Color readEyeColor() throws InvalidDataException {
+        YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Does person has eye color?");
+        if(!questionAsker.ask()) return null;
         if(!Constants.SCRIPT_MODE) {
             Console.getInstance().printLn("List of possible eye color values:");
             for (Color i : Color.values()) {
@@ -91,6 +98,8 @@ public class WorkerReader extends ValueReader {
         return (Color) readValue("eye color", WorkerValidators.eyeColorValidator, WorkerParsers.eyeColorParser);
     }
     public Country readNationality() throws InvalidDataException {
+        YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Does person has nationality?");
+        if(!questionAsker.ask()) return null;
         if(!Constants.SCRIPT_MODE) {
             Console.getInstance().printLn("List of possible nationality values:");
             for (Country i : Country.values()) {

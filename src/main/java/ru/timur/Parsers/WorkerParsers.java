@@ -23,7 +23,7 @@ public class WorkerParsers {
             try{
                 return Long.parseLong(s);
             } catch (NumberFormatException e){
-                throw new InvalidDataException("Id must be a long!");
+                throw new InvalidDataException("Value must be a long!");
             }
         }
     };
@@ -33,7 +33,7 @@ public class WorkerParsers {
             try{
                 return Integer.parseInt(s);
             } catch (NumberFormatException e){
-                throw new InvalidDataException("Id must be an integer!");
+                throw new InvalidDataException("Value must be an integer!");
             }
         }
     };
@@ -43,7 +43,7 @@ public class WorkerParsers {
             try{
                 return Double.parseDouble(s);
             } catch (NumberFormatException e){
-                throw new InvalidDataException("x coordinate must be a double!");
+                throw new InvalidDataException("Value must be a double!");
             }
         }
     };

@@ -138,5 +138,19 @@
       "eyeColor": "RED",
       "nationality": "VATICAN"
     }
+  },
+  {
+    "id": 12,
+    "name": "dfg",
+    "coordinates": {
+      "x": 5.0,
+      "y": 5.0
+    },
+    "creationDate": "14.02.2024 00:10",
+    "salary": 5,
+    "startDate": "01.02.0225",
+    "endDate": "02.02.0232",
+    "status": "FIRED",
+    "person": null
   }
 ]

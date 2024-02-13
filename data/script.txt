@@ -11,5 +11,4 @@ FIRED
 RED
 VATICAN
 show
-execute_script C:\Users\hache\IdeaProjects\Lab5\data\script1.txt
 clear
