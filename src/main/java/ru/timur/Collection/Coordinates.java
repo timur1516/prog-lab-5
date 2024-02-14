@@ -2,10 +2,8 @@ package ru.timur.Collection;
 
 /**
  * Class to store and operate with coordinates
- *
- * @author Timur Stupin
  */
-public class Coordinates {
+public class Coordinates implements Comparable<Coordinates>{
     /**
      * x coordinate,
      * Max value is 657
@@ -35,5 +33,9 @@ public class Coordinates {
 
     public double getY() {
         return y;
+    }
+    @Override
+    public int compareTo(Coordinates o) {
+        return (int) (((this.x * this.x) + (this.y * this.y)) - ((o.x * o.x) + (o.y * o.y)));
     }
 }

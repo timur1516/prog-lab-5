@@ -6,27 +6,60 @@ import ru.timur.Commands.UserCommand;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Controllers.CommandsController;
 import ru.timur.Controllers.DataFileController;
+import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.RecursiveScriptException;
 import ru.timur.UI.Console;
 
 import java.io.*;
 import java.util.*;
 
+/**
+ * Main app class
+ * Completes initialization of all controllers, set default input stream for Console
+ * In the beginning load data file (if it is wrong program stops), then call interactiveMode method
+ */
 public class Main {
-    private static String fileName = "C:\\Users\\hache\\IdeaProjects\\Lab5\\data\\data.json";
+    /**
+     * Path to json file with initial collection data
+     * Is taken from Environmental variable
+     */
+    private static final String dataFilePath = System.getenv("ProgDataFile");
+    /**
+     * Controller of collection
+     */
     private static CollectionController collectionController;
+    /**
+     * Reader of data elements
+     */
     private static WorkerReader workerReader;
+    /**
+     * Controller of commands
+     */
     private static CommandsController commandsController;
+    /**
+     * Controller of data file
+     */
     private static DataFileController dataFileController = null;
 
+    /**
+     * Main method of program
+     * Call methods to load data file, init all controllers and start handling user commands
+     * @param args (not used)
+     */
     public static void main(String[] args) {
         Console.getInstance().setScanner(new Scanner(System.in));
-        collectionController = new CollectionController(loadData(fileName));
+        collectionController = new CollectionController(loadData(dataFilePath));
         workerReader = new WorkerReader(collectionController);
         commandsController = new CommandsController(collectionController, workerReader, dataFileController);
         interactiveMode();
     }
-    public static void scriptMode() throws IOException, RecursiveScriptException {
+
+    /**
+     * method which is used to work with script file
+     * @throws IOException If there are some problems with reading file
+     * @throws RecursiveScriptException If completing script is recursive
+     */
+    public static void scriptMode() throws RecursiveScriptException, IOException {
         while(Console.getInstance().hasNextLine()) {
             String s = Console.getInstance().readLine();
             String[] input = (s.trim() + " ").split(" ");
@@ -58,7 +91,7 @@ public class Main {
     private static PriorityQueue<Worker> loadData(String path){
         PriorityQueue<Worker> data = null;
         try {
-            dataFileController = new DataFileController(fileName);
+            dataFileController = new DataFileController(dataFilePath);
         } catch (FileNotFoundException e) {
             Console.getInstance().printError("File not found!");
             System.exit(0);
