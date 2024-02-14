@@ -7,128 +7,113 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 public class WorkerValidators {
-    public static Validator workerValidator = new Validator() {
+    public static Validator<Worker> workerValidator = new Validator<Worker>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
-            if(!(value instanceof Worker)) throw new RuntimeException("Wrong argument type!");
-            idValidator.validate(((Worker) value).getId());
-            nameValidator.validate(((Worker) value).getName());
-            coordinatesValidator.validate(((Worker) value).getCoordinates());
-            creationDateValidator.validate(((Worker) value).getCreationDate());
-            salaryValidator.validate(((Worker) value).getSalary());
-            startDateValidator.validate(((Worker) value).getStartDate());
-            endDateValidator.validate(((Worker) value).getEndDate());
-            statusValidator.validate(((Worker) value).getStatus());
-            personValidator.validate(((Worker) value).getPerson());
+        public void validate(Worker value) throws InvalidDataException {
+            if(value == null) throw new InvalidDataException("Worker can't be empty!");
+            idValidator.validate(value.getId());
+            nameValidator.validate(value.getName());
+            coordinatesValidator.validate(value.getCoordinates());
+            creationDateValidator.validate(value.getCreationDate());
+            salaryValidator.validate(value.getSalary());
+            startDateValidator.validate(value.getStartDate());
+            endDateValidator.validate(value.getEndDate());
+            statusValidator.validate(value.getStatus());
+            personValidator.validate(value.getPerson());
         }
     };
-    public static Validator idValidator = new Validator() {
+    public static Validator<Long> idValidator = new Validator<Long>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Long value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("Id can't be empty!");
-            if(!(value instanceof Long)) throw new RuntimeException("Wrong argument type!");
-            if((Long) value <= 0) throw new InvalidDataException("Id must be greater than zero!");
+            if(value <= 0) throw new InvalidDataException("Id must be greater than zero!");
         }
     };
-    public static Validator nameValidator = new Validator() {
+    public static Validator<String> nameValidator = new Validator<String>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
-            if(value == null) throw new InvalidDataException("Name can't be empty!");
-            if(!(value instanceof String)) throw new RuntimeException("Wrong argument type!");
-            if(((String) value).isEmpty()) throw new InvalidDataException("Name can't be empty!");
-            if(((String) value).contains(" ")) throw new InvalidDataException("Name can't contain spaces!");
+        public void validate(String value) throws InvalidDataException {
+            if(value == null || value.isEmpty()) throw new InvalidDataException("Name can't be empty!");
+            if(value.contains(" ")) throw new InvalidDataException("Name can't contain spaces!");
         }
     };
-    public static Validator coordinatesValidator = new Validator() {
+    public static Validator<Coordinates> coordinatesValidator = new Validator<Coordinates>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Coordinates value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("Coordinates can't be empty!");
-            if(!(value instanceof Coordinates)) throw new RuntimeException("Wrong argument type!");
-            xValidator.validate(((Coordinates) value).getX());
-            yValidator.validate(((Coordinates) value).getY());
+            xValidator.validate(value.getX());
+            yValidator.validate(value.getY());
         }
     };
-    public static Validator xValidator = new Validator() {
+    public static Validator<Double> xValidator = new Validator<Double>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Double value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("X can't be empty!");
-            if(!(value instanceof Double)) throw new RuntimeException("Wrong argument type!");
-            if((Double) value > 657) throw new InvalidDataException("x coordinate max value is 657");
+            if(value > 657) throw new InvalidDataException("x coordinate max value is 657");
         }
     };
-    public static Validator yValidator = new Validator() {
+    public static Validator<Double> yValidator = new Validator<Double>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Double value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("Y can't be empty!");
-            if(!(value instanceof Double)) throw new RuntimeException("Wrong argument type!");
         }
     };
-    public static Validator startDateValidator = new Validator() {
+    public static Validator<LocalDateTime> startDateValidator = new Validator<LocalDateTime>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(LocalDateTime value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("Start date can't be empty!");
-            if(!(value instanceof LocalDateTime)) throw new RuntimeException("Wrong argument type!");
         }
     };
-    public static Validator endDateValidator = new Validator() {
+    public static Validator<LocalDateTime> endDateValidator = new Validator<LocalDateTime>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(LocalDateTime value) throws InvalidDataException {
             if(value == null) return;
-            if(!(value instanceof LocalDateTime)) throw new RuntimeException("Wrong argument type!");
         }
     };
-    public static Validator creationDateValidator = new Validator() {
+    public static Validator<ZonedDateTime> creationDateValidator = new Validator<ZonedDateTime>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(ZonedDateTime value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("Creation date can't be empty!");
-            if(!(value instanceof ZonedDateTime)) throw new RuntimeException("Wrong argument type!");
         }
     };
-    public static Validator salaryValidator = new Validator() {
+    public static Validator<Integer> salaryValidator = new Validator<Integer>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Integer value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("Salary can't be empty!");
-            if(!(value instanceof Integer)) throw new RuntimeException("Wrong argument type!");
-            if((Integer) value <= 0) throw new InvalidDataException("Salary must be greater than zero!");
+            if(value <= 0) throw new InvalidDataException("Salary must be greater than zero!");
         }
     };
-    public static Validator statusValidator = new Validator() {
+    public static Validator<Status> statusValidator = new Validator<Status>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Status value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("Status can't be empty!");
-            if(!(value instanceof Status)) throw new RuntimeException("Wrong argument type!");
         }
     };
-    public static Validator personValidator = new Validator() {
+    public static Validator<Person> personValidator = new Validator<Person>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Person value) throws InvalidDataException {
             if(value == null) return;
-            if(!(value instanceof Person)) throw new RuntimeException("Wrong argument type!");
-            heightValidator.validate(((Person) value).getHeight());
-            eyeColorValidator.validate(((Person) value).getEyeColor());
-            nationalityValidator.validate(((Person) value).getNationality());
+            heightValidator.validate(value.getHeight());
+            eyeColorValidator.validate(value.getEyeColor());
+            nationalityValidator.validate(value.getNationality());
         }
     };
-    public static Validator heightValidator = new Validator() {
+    public static Validator<Long> heightValidator = new Validator<Long>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Long value) throws InvalidDataException {
             if(value == null) throw new InvalidDataException("Height can't be empty!");
-            if(!(value instanceof Long)) throw new RuntimeException("Wrong argument type!");
-            if((Long) value <= 0) throw new InvalidDataException("Height must be greater than zero!");
+            if(value <= 0) throw new InvalidDataException("Height must be greater than zero!");
         }
     };
-    public static Validator eyeColorValidator = new Validator() {
+    public static Validator<Color> eyeColorValidator = new Validator<Color>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Color value) throws InvalidDataException {
             if(value == null) return;
-            if(!(value instanceof Color)) throw new RuntimeException("Wrong argument type!");
         }
     };
-    public static Validator nationalityValidator = new Validator() {
+    public static Validator<Country> nationalityValidator = new Validator<Country>() {
         @Override
-        public void validate(Object value) throws InvalidDataException {
+        public void validate(Country value) throws InvalidDataException {
             if(value == null) return;
-            if(!(value instanceof Country)) throw new RuntimeException("Wrong argument type!");
         }
     };
 }

@@ -7,8 +7,8 @@ import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.UI.Console;
 
 public abstract class ValueReader {
-    public Object readValue(String valueName, Validator validator, Parser parser) throws InvalidDataException {
-        Object value;
+    public <T> T readValue(String valueName, Validator<T> validator, Parser<T> parser) throws InvalidDataException {
+        T value;
         while (true) {
             if(!Constants.SCRIPT_MODE) Console.getInstance().print("Enter " + valueName + ": ");
             String s = Console.getInstance().readLine().trim();

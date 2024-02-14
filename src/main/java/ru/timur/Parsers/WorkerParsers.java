@@ -11,15 +11,15 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 
 public class WorkerParsers {
-    public static Parser stringParser = new Parser() {
+    public static Parser<String> stringParser = new Parser<String>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public String parse(String s) throws InvalidDataException {
             return s;
         }
     };
-    public static Parser longParser = new Parser() {
+    public static Parser<Long> longParser = new Parser<Long>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public Long parse(String s) throws InvalidDataException {
             try{
                 return Long.parseLong(s);
             } catch (NumberFormatException e){
@@ -27,9 +27,9 @@ public class WorkerParsers {
             }
         }
     };
-    public static Parser integerParser = new Parser() {
+    public static Parser<Integer> integerParser = new Parser<Integer>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public Integer parse(String s) throws InvalidDataException {
             try{
                 return Integer.parseInt(s);
             } catch (NumberFormatException e){
@@ -37,9 +37,9 @@ public class WorkerParsers {
             }
         }
     };
-    public static Parser doubleParser = new Parser() {
+    public static Parser<Double> doubleParser = new Parser<Double>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public Double parse(String s) throws InvalidDataException {
             try{
                 return Double.parseDouble(s);
             } catch (NumberFormatException e){
@@ -47,9 +47,9 @@ public class WorkerParsers {
             }
         }
     };
-    public static Parser localDateTimeParser = new Parser() {
+    public static Parser<LocalDateTime> localDateTimeParser = new Parser<LocalDateTime>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public LocalDateTime parse(String s) throws InvalidDataException {
             try{
                 return LocalDateTime.parse(s, Constants.formatter);
             } catch (DateTimeParseException e){
@@ -57,9 +57,9 @@ public class WorkerParsers {
             }
         }
     };
-    public static Parser zonedlDateTimeParser = new Parser() {
+    public static Parser<ZonedDateTime> zonedlDateTimeParser = new Parser<ZonedDateTime>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public ZonedDateTime parse(String s) throws InvalidDataException {
             try{
                 return ZonedDateTime.parse(s);
             } catch (DateTimeParseException e){
@@ -67,9 +67,9 @@ public class WorkerParsers {
             }
         }
     };
-    public static Parser statusParser = new Parser() {
+    public static Parser<Status> statusParser = new Parser<Status>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public Status parse(String s) throws InvalidDataException {
             try{
                 return Status.valueOf(s);
             } catch (IllegalArgumentException e){
@@ -77,9 +77,9 @@ public class WorkerParsers {
             }
         }
     };
-    public static Parser eyeColorParser = new Parser() {
+    public static Parser<Color> eyeColorParser = new Parser<Color>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public Color parse(String s) throws InvalidDataException {
             try{
                 return Color.valueOf(s);
             } catch (IllegalArgumentException e){
@@ -87,9 +87,9 @@ public class WorkerParsers {
             }
         }
     };
-    public static Parser nationalityParser = new Parser() {
+    public static Parser<Country> nationalityParser = new Parser<Country>() {
         @Override
-        public Object parse(String s) throws InvalidDataException {
+        public Country parse(String s) throws InvalidDataException {
             try{
                 return Country.valueOf(s);
             } catch (IllegalArgumentException e){

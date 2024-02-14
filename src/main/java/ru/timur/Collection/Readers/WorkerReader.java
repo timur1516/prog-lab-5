@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 public class WorkerReader extends ValueReader {
-    private CollectionController collectionController;
+    private final CollectionController collectionController;
     public WorkerReader(CollectionController collectionController) {
         this.collectionController = collectionController;
     }
@@ -32,11 +32,11 @@ public class WorkerReader extends ValueReader {
     }
 
     public long readId() throws InvalidDataException {
-        return (long) readValue("id", WorkerValidators.idValidator, WorkerParsers.longParser);
+        return readValue("id", WorkerValidators.idValidator, WorkerParsers.longParser);
     }
 
     public String readName() throws InvalidDataException {
-        return (String) readValue("name", WorkerValidators.nameValidator, WorkerParsers.stringParser);
+        return readValue("name", WorkerValidators.nameValidator, WorkerParsers.stringParser);
     }
 
     public Coordinates readCoordinates() throws InvalidDataException {
@@ -44,29 +44,29 @@ public class WorkerReader extends ValueReader {
     }
 
     public double readX() throws InvalidDataException {
-        return (double) readValue("x coordiate", WorkerValidators.xValidator, WorkerParsers.doubleParser);
+        return readValue("x coordiate", WorkerValidators.xValidator, WorkerParsers.doubleParser);
     }
 
     public double readY() throws InvalidDataException {
-        return (double) readValue("y coordiate", WorkerValidators.yValidator, WorkerParsers.doubleParser);
+        return readValue("y coordiate", WorkerValidators.yValidator, WorkerParsers.doubleParser);
     }
 
     public ZonedDateTime readCreationDate() throws InvalidDataException {
-        return (ZonedDateTime) readValue("creation date", WorkerValidators.creationDateValidator, WorkerParsers.zonedlDateTimeParser);
+        return readValue("creation date", WorkerValidators.creationDateValidator, WorkerParsers.zonedlDateTimeParser);
     }
 
     public Integer readSalary() throws InvalidDataException {
-        return (Integer) readValue("salary", WorkerValidators.salaryValidator, WorkerParsers.integerParser);
+        return readValue("salary", WorkerValidators.salaryValidator, WorkerParsers.integerParser);
     }
 
     public LocalDateTime readStartDate() throws InvalidDataException {
-        return (LocalDateTime) readValue("start date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.startDateValidator, WorkerParsers.localDateTimeParser);
+        return readValue("start date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.startDateValidator, WorkerParsers.localDateTimeParser);
     }
 
     public LocalDateTime readEndDate() throws InvalidDataException {
         YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Does worker has end date?");
         if(!questionAsker.ask()) return null;
-        return (LocalDateTime) readValue("end date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.endDateValidator, WorkerParsers.localDateTimeParser);
+        return readValue("end date (" + Constants.DATE_FORMAT_STRING + ")", WorkerValidators.endDateValidator, WorkerParsers.localDateTimeParser);
     }
 
     public Status readStatus() throws InvalidDataException {
@@ -76,7 +76,7 @@ public class WorkerReader extends ValueReader {
                 Console.getInstance().printLn(i);
             }
         }
-        return (Status) readValue("status", WorkerValidators.statusValidator, WorkerParsers.statusParser);
+        return readValue("status", WorkerValidators.statusValidator, WorkerParsers.statusParser);
     }
     public Person readPerson() throws InvalidDataException {
         YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Does worker has person?");
@@ -84,7 +84,7 @@ public class WorkerReader extends ValueReader {
         return new Person(readHeight(), readEyeColor(), readNationality());
     }
     public long readHeight() throws InvalidDataException {
-        return (long) readValue("height", WorkerValidators.heightValidator, WorkerParsers.longParser);
+        return readValue("height", WorkerValidators.heightValidator, WorkerParsers.longParser);
     }
     public Color readEyeColor() throws InvalidDataException {
         YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Does person has eye color?");
@@ -95,7 +95,7 @@ public class WorkerReader extends ValueReader {
                 Console.getInstance().printLn(i);
             }
         }
-        return (Color) readValue("eye color", WorkerValidators.eyeColorValidator, WorkerParsers.eyeColorParser);
+        return readValue("eye color", WorkerValidators.eyeColorValidator, WorkerParsers.eyeColorParser);
     }
     public Country readNationality() throws InvalidDataException {
         YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Does person has nationality?");
@@ -106,6 +106,6 @@ public class WorkerReader extends ValueReader {
                 Console.getInstance().printLn(i);
             }
         }
-        return (Country) readValue("nationality", WorkerValidators.nationalityValidator, WorkerParsers.nationalityParser);
+        return readValue("nationality", WorkerValidators.nationalityValidator, WorkerParsers.nationalityParser);
     }
 }

@@ -3,6 +3,6 @@ package ru.timur.Validators;
 import ru.timur.Exceptions.InvalidDataException;
 
 @FunctionalInterface
-public interface Validator {
-    void validate(Object value) throws InvalidDataException;
+public interface Validator<T> {
+    void validate(T value) throws InvalidDataException;
 }
