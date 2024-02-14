@@ -2,6 +2,8 @@ package ru.timur.Commands;
 
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
+import ru.timur.UI.Console;
+import ru.timur.UI.YesNoQuestionAsker;
 
 public class ExitCommand extends UserCommand {
 
@@ -11,7 +13,11 @@ public class ExitCommand extends UserCommand {
 
     @Override
     public void execute(String[] commandArgs) throws InvalidDataException {
-        System.exit(0);
+        Console.getInstance().printLn("Please, make sure that current collection is saved");
+        YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Do you want to exit?");
+        if(questionAsker.ask()) {
+            System.exit(0);
+        }
     }
 
     @Override

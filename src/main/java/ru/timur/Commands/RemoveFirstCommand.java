@@ -3,6 +3,7 @@ package ru.timur.Commands;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
+import ru.timur.UI.Console;
 
 import java.util.NoSuchElementException;
 
@@ -19,6 +20,7 @@ public class RemoveFirstCommand extends UserCommand {
             throw new NoSuchElementException("Collection is empty!");
         }
         this.collectionController.removeFirst();
+        Console.getInstance().printLn("Element removed successfully!");
     }
 
     @Override

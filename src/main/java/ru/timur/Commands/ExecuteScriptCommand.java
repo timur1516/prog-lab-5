@@ -29,6 +29,7 @@ public class ExecuteScriptCommand extends UserCommand {
         Constants.SCRIPT_MODE = true;
         try {
             Main.scriptMode();
+            Console.getInstance().printLn("Script executed successfully!");
         } finally {
             Constants.scriptStack.pop();
             Constants.SCRIPT_MODE = false;

@@ -9,9 +9,8 @@ public class YesNoQuestionAsker {
     }
     public boolean ask(){
         if(Constants.SCRIPT_MODE) return true;
-        Console.getInstance().printLn(question);
+        Console.getInstance().printLn(question + " (yes/no)");
         while (true){
-            Console.getInstance().printLn("Please enter yes or no");
             String userAnswer = Console.getInstance().readLine().trim();
             if(userAnswer.equals("yes")){
                 return true;
@@ -19,6 +18,7 @@ public class YesNoQuestionAsker {
             if(userAnswer.equals("no")){
                 return false;
             }
+            Console.getInstance().printLn("Please enter yes or no");
         }
     }
 }

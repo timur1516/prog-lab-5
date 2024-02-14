@@ -4,6 +4,7 @@ import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.Parsers.WorkerParsers;
+import ru.timur.UI.Console;
 import ru.timur.Validators.WorkerValidators;
 
 import java.util.NoSuchElementException;
@@ -19,6 +20,7 @@ public class RemoveByIdCommand extends UserCommand {
     @Override
     public void execute(String[] commandArgs) throws InvalidDataException {
         this.collectionController.removeById(Long.parseLong(commandArgs[0]));
+        Console.getInstance().printLn("Element removed successfully!");
     }
 
     @Override

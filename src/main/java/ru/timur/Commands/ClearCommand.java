@@ -3,6 +3,7 @@ package ru.timur.Commands;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
+import ru.timur.UI.Console;
 
 import java.io.FileNotFoundException;
 
@@ -16,6 +17,7 @@ public class ClearCommand extends UserCommand {
     @Override
     public void execute(String[] commandArgs) throws InvalidDataException {
         this.collectionController.clear();
+        Console.getInstance().printLn("Collection cleared successfully!");
     }
 
     @Override

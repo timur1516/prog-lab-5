@@ -5,6 +5,7 @@ import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Collection.Readers.WorkerReader;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
+import ru.timur.UI.Console;
 
 public class RemoveGreaterCommand extends UserCommand {
     private WorkerReader workerReader;
@@ -19,6 +20,7 @@ public class RemoveGreaterCommand extends UserCommand {
     public void execute(String[] commandArgs) throws InvalidDataException {
         Worker worker = this.workerReader.readWorker();
         this.collectionController.removeGreater(worker);
+        Console.getInstance().printLn("Elements removed successfully!");
     }
 
     @Override

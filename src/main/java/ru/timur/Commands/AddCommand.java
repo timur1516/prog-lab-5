@@ -5,6 +5,7 @@ import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.Collection.Readers.WorkerReader;
+import ru.timur.UI.Console;
 
 public class AddCommand extends UserCommand {
     private CollectionController collectionController;
@@ -19,6 +20,7 @@ public class AddCommand extends UserCommand {
     public void execute(String[] commandArgs) throws InvalidDataException {
         Worker worker = this.workerReader.readWorker();
         collectionController.add(worker);
+        Console.getInstance().printLn("Worker added successfully!");
     }
 
     @Override

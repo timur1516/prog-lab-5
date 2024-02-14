@@ -1,19 +1,5 @@
 [
   {
-    "id": 2,
-    "name": "name2",
-    "coordinates": {
-      "x": 2.0,
-      "y": 6.0
-    },
-    "creationDate": "06.02.2024 17:29",
-    "salary": 2,
-    "startDate": "01.02.2021",
-    "endDate": null,
-    "status": "FIRED",
-    "person": null
-  },
-  {
     "id": 5,
     "name": "snd",
     "coordinates": {
@@ -29,6 +15,24 @@
       "height": 151123,
       "eyeColor": "BLUE",
       "nationality": "USA"
+    }
+  },
+  {
+    "id": 7,
+    "name": "name3",
+    "coordinates": {
+      "x": 5.0,
+      "y": 5.0
+    },
+    "creationDate": "13.02.2024 23:11",
+    "salary": 2,
+    "startDate": "01.02.2021",
+    "endDate": "01.02.2022",
+    "status": "FIRED",
+    "person": {
+      "height": 125,
+      "eyeColor": "RED",
+      "nationality": "VATICAN"
     }
   },
   {
@@ -50,7 +54,7 @@
     }
   },
   {
-    "id": 7,
+    "id": 11,
     "name": "name3",
     "coordinates": {
       "x": 5.0,
@@ -105,24 +109,6 @@
   },
   {
     "id": 10,
-    "name": "name3",
-    "coordinates": {
-      "x": 5.0,
-      "y": 5.0
-    },
-    "creationDate": "13.02.2024 23:11",
-    "salary": 2,
-    "startDate": "01.02.2021",
-    "endDate": "01.02.2022",
-    "status": "FIRED",
-    "person": {
-      "height": 125,
-      "eyeColor": "RED",
-      "nationality": "VATICAN"
-    }
-  },
-  {
-    "id": 11,
     "name": "name3",
     "coordinates": {
       "x": 5.0,

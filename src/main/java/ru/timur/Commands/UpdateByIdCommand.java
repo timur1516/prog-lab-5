@@ -6,6 +6,7 @@ import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.Collection.Readers.WorkerReader;
 import ru.timur.Parsers.WorkerParsers;
+import ru.timur.UI.Console;
 import ru.timur.Validators.WorkerValidators;
 
 import java.util.NoSuchElementException;
@@ -23,6 +24,7 @@ public class UpdateByIdCommand extends UserCommand {
     public void execute(String[] commandArgs) throws InvalidDataException {
         Worker worker = this.workerReader.readWorker();
         this.collectionController.update(Long.parseLong(commandArgs[0]), worker);
+        Console.getInstance().printLn("Element updated successfully!");
     }
 
     @Override
