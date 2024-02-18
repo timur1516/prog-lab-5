@@ -22,7 +22,7 @@ public class UpdateByIdCommand extends UserCommand {
     }
 
     @Override
-    public void execute() throws InvalidDataException {
+    public void execute() throws InvalidDataException, NoSuchElementException {
         if (!this.collectionController.containsId(id)) {
             throw new NoSuchElementException("No element with such id!");
         }

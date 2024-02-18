@@ -14,6 +14,10 @@ public class PrintFieldDescendingSalaryCommand extends UserCommand {
 
     @Override
     public void execute() throws InvalidDataException {
+        if(this.collectionController.getCollection().isEmpty()){
+            Console.getInstance().printLn("Collection is empty!");
+            return;
+        }
         Console.getInstance().printLn(this.collectionController.getDescendingSalaries());
     }
 

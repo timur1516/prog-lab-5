@@ -15,9 +15,10 @@ public class RemoveFirstCommand extends UserCommand {
     }
 
     @Override
-    public void execute() throws InvalidDataException, NoSuchElementException {
+    public void execute() throws InvalidDataException {
         if(this.collectionController.getCollection().isEmpty()){
-            throw new NoSuchElementException("Collection is empty!");
+            Console.getInstance().printLn("Collection is empty!");
+            return;
         }
         this.collectionController.removeFirst();
         Console.getInstance().printLn("Element removed successfully!");

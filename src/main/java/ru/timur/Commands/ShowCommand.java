@@ -16,11 +16,10 @@ public class ShowCommand extends UserCommand {
     public void execute() throws InvalidDataException {
         if(this.collectionController.getCollection().isEmpty()){
             Console.getInstance().printLn("Collection is empty");
+            return;
         }
-        else {
-            this.collectionController.getCollection()
-                    .forEach(worker -> Console.getInstance().printLn(worker));
-        }
+        this.collectionController.getCollection()
+                .forEach(worker -> Console.getInstance().printLn(worker));
     }
 
     @Override

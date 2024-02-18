@@ -1,5 +1,6 @@
 package ru.timur.Commands;
 
+import ru.timur.Constants;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
@@ -19,6 +20,13 @@ public class FilterLessThanEndDateCommand extends UserCommand {
 
     @Override
     public void execute() throws InvalidDataException {
+        if(this.collectionController.getCollection().isEmpty()){
+            Console.getInstance().printLn("Collection is empty!");
+            if(Constants.SCRIPT_MODE){
+                workerReader.readEndDate();
+            }
+            return;
+        }
         LocalDateTime endDate = workerReader.readEndDate();
         Console.getInstance().printLn(this.collectionController.getLessThanEndDate(endDate));
     }

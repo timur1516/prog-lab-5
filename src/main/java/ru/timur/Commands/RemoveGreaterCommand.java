@@ -1,6 +1,7 @@
 package ru.timur.Commands;
 
 import ru.timur.Collection.Worker;
+import ru.timur.Constants;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Collection.Readers.WorkerReader;
@@ -21,8 +22,13 @@ public class RemoveGreaterCommand extends UserCommand {
     @Override
     public void execute() throws InvalidDataException {
         if(this.collectionController.getCollection().isEmpty()){
-            throw new NoSuchElementException("Collection is empty!");
+            Console.getInstance().printLn("Collection is empty!");
+            if(Constants.SCRIPT_MODE){
+                workerReader.readWorker();
+            }
+            return;
         }
+
         Worker worker = this.workerReader.readWorker();
         int elementsRemoved = this.collectionController.removeGreater(worker);
         Console.getInstance().printLn(String.format("Successfully removed %d elements!", elementsRemoved));
