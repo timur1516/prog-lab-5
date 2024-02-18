@@ -10,6 +10,7 @@ import ru.timur.UI.Console;
 public class AddCommand extends UserCommand {
     private CollectionController collectionController;
     private WorkerReader workerReader;
+
     public AddCommand(WorkerReader workerReader, CollectionController collectionController) {
         super("add", "{element}", "add new element to collection");
         this.collectionController = collectionController;
@@ -17,14 +18,14 @@ public class AddCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws InvalidDataException {
+    public void execute() throws InvalidDataException {
         Worker worker = this.workerReader.readWorker();
         collectionController.add(worker);
         Console.getInstance().printLn("Worker added successfully!");
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

@@ -1,19 +1,24 @@
 package ru.timur.Commands;
 
+import ru.timur.Controllers.CollectionController;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.UI.Console;
 import ru.timur.UI.YesNoQuestionAsker;
 
 public class ExitCommand extends UserCommand {
+    private CollectionController collectionController;
 
-    public ExitCommand() {
+    public ExitCommand(CollectionController collectionController) {
         super("exit", "stop program without saving collection");
+        this.collectionController = collectionController;
     }
 
     @Override
-    public void execute(String[] commandArgs) throws InvalidDataException {
-        Console.getInstance().printLn("Please, make sure that current collection is saved");
+    public void execute() throws InvalidDataException {
+        if(this.collectionController.wasChanged()) {
+            Console.getInstance().printLn("Last changes in collection aren't saved!");
+        }
         YesNoQuestionAsker questionAsker = new YesNoQuestionAsker("Do you want to exit?");
         if(questionAsker.ask()) {
             System.exit(0);
@@ -21,7 +26,7 @@ public class ExitCommand extends UserCommand {
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0){
             throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
         }

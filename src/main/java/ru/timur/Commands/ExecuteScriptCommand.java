@@ -21,11 +21,31 @@ public class ExecuteScriptCommand extends UserCommand {
         super("execute_script", "file_name", "read and execute script from given file");
     }
 
+    private String scriptFilePath;
+
     @Override
-    public void execute(String[] commandArgs) throws IOException, RecursiveScriptException {
-        Constants.scriptStack.push(commandArgs[0]);
+    public void execute() throws Exception {
+
+        Path path = Paths.get(scriptFilePath);
+        if(!Files.exists(path)){
+            throw new FileNotFoundException("Script file does not exist!");
+        }
+        if(Files.isDirectory(path)){
+            throw new FileNotFoundException("Given path is a directory!");
+        }
+        if(!scriptFilePath.endsWith(".txt")){
+            throw new FileNotFoundException("Script file must be .txt!");
+        }
+        if(!Files.isReadable(path)){
+            throw new WrongFilePermissionsException("Wrong script file permissions! File is not readable!");
+        }
+
+        if(!Constants.scriptStack.isEmpty() && Constants.scriptStack.contains(scriptFilePath)){
+            throw new RecursiveScriptException("Script is recursive!");
+        }
+        Constants.scriptStack.push(scriptFilePath);
         Scanner prevScanner = Console.getInstance().getScanner();
-        Console.getInstance().setScanner(new Scanner(new FileInputStream(commandArgs[0])));
+        Console.getInstance().setScanner(new Scanner(new FileInputStream(scriptFilePath)));
         Constants.SCRIPT_MODE = true;
         try {
             Main.scriptMode();
@@ -38,23 +58,8 @@ public class ExecuteScriptCommand extends UserCommand {
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException, FileNotFoundException, RecursiveScriptException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 1) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 1, commandArgs.length);
-        Path path = Paths.get(commandArgs[0]);
-        if(!Files.exists(path)){
-            throw new FileNotFoundException("Script file does not exists!");
-        }
-        if(Files.isDirectory(path)){
-            throw new FileNotFoundException("Given path is a directory!");
-        }
-        if(!commandArgs[0].substring(commandArgs[0].length() - 4).equals(".txt")){
-            throw new FileNotFoundException("Script file must be .txt!");
-        }
-        if(!Files.isReadable(path)){
-            throw new WrongFilePermissionsException("Wrong script file permissions! File is not readable!");
-        }
-        if(!Constants.scriptStack.isEmpty() && Constants.scriptStack.contains(commandArgs[0])){
-            throw new RecursiveScriptException("Script is recursive!");
-        }
+        this.scriptFilePath = commandArgs[0];
     }
 }

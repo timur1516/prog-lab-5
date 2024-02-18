@@ -12,13 +12,13 @@ public class HelpCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) {
+    public void execute() {
         this.controller.getCommandsList()
                 .forEach(command -> Console.getInstance().printLn(command));
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

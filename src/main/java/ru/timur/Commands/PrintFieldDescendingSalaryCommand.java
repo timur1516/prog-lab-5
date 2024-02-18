@@ -13,12 +13,12 @@ public class PrintFieldDescendingSalaryCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws InvalidDataException {
+    public void execute() throws InvalidDataException {
         Console.getInstance().printLn(this.collectionController.getDescendingSalaries());
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

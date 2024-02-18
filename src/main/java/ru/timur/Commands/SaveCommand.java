@@ -17,9 +17,10 @@ public class SaveCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws IOException {
+    public void execute() throws IOException {
         try {
             this.dataFileController.writeToJSON(this.collectionController.getCollection());
+            this.collectionController.removeChangeFlag();
             Console.getInstance().printLn("Collection saved successfully!");
         } catch (IOException e) {
             throw new IOException("An error occurred while writing to the file!");
@@ -27,7 +28,7 @@ public class SaveCommand extends UserCommand {
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

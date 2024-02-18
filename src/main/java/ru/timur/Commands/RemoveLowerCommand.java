@@ -7,6 +7,8 @@ import ru.timur.Collection.Readers.WorkerReader;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 import ru.timur.UI.Console;
 
+import java.util.NoSuchElementException;
+
 public class RemoveLowerCommand extends UserCommand {
     private WorkerReader workerReader;
     private CollectionController collectionController;
@@ -17,14 +19,17 @@ public class RemoveLowerCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws InvalidDataException {
+    public void execute() throws InvalidDataException {
+        if(this.collectionController.getCollection().isEmpty()){
+            throw new NoSuchElementException("Collection is empty!");
+        }
         Worker worker = this.workerReader.readWorker();
-        this.collectionController.removeLower(worker);
-        Console.getInstance().printLn("Elements removed successfully!");
+        int elementsRemoved = this.collectionController.removeLower(worker);
+        Console.getInstance().printLn(String.format("Successfully removed %d elements!", elementsRemoved));
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

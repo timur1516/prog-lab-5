@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 /**
  * Class which completes all operations with Collection of workers
  *
- * @author Timur Stupin
  */
 public class CollectionController {
     /**
@@ -24,10 +23,15 @@ public class CollectionController {
      * In fact it is equal to CollectionManager object creation date
      */
     private final LocalDateTime creationDate;
+    /**
+     * Boolean value which is true if collection was change after last saving or loading from data file
+     */
+    private boolean changeFlag;
 
     public CollectionController(PriorityQueue<Worker> collection) {
         this.collection = collection;
         this.creationDate = LocalDateTime.now();
+        this.changeFlag = false;
     }
 
     /**
@@ -50,6 +54,26 @@ public class CollectionController {
         return true;
     }
 
+    /**
+     * Method to check if current collection isn't saved in data file
+     * @return boolean value
+     */
+    public boolean wasChanged(){
+        return this.changeFlag;
+    }
+
+    /**
+     * Method to set changeFlag to false value
+     */
+    public void removeChangeFlag(){
+        this.changeFlag = false;
+    }
+
+    /**
+     * Method to generate unique id for new element of collection
+     * It gets the maximum id in current collection and then increments it
+     * @return id
+     */
     public long generateId(){
         if(this.collection.isEmpty()) return 1;
         return this.collection
@@ -77,7 +101,7 @@ public class CollectionController {
     }
 
     /**
-     * This method chech if collection contain any element with id equal to given
+     * This method check if collection contain any element with id equal to given
      * @param id to compare with
      * @return true if element was found, else false
      */
@@ -86,6 +110,10 @@ public class CollectionController {
         return this.collection.stream().anyMatch(worker -> worker.getId() == id);
     }
 
+    /**
+     * Method to get information about collection (type of elements, creation date, collection size)
+     * @return Formatted string
+     */
     public String getInfo() {
         return "Type: " + this.collection.getClass().getName() +
             "\nCreation date: " + this.creationDate.format(Constants.formatter) +
@@ -99,6 +127,8 @@ public class CollectionController {
      */
     public void add(Worker newWorker){
         this.collection.add(newWorker);
+
+        this.changeFlag = true;
     }
 
     /**
@@ -120,6 +150,8 @@ public class CollectionController {
      */
     public void removeById(long id){
         this.collection.removeIf(worker -> worker.getId() == id);
+
+        this.changeFlag = true;
     }
 
     /**
@@ -127,6 +159,7 @@ public class CollectionController {
      */
     public void clear(){
         this.collection.clear();
+        this.changeFlag = true;
     }
 
     /**
@@ -134,24 +167,37 @@ public class CollectionController {
      */
     public void removeFirst(){
         this.collection.poll();
+
+        this.changeFlag = true;
     }
 
     /**
      * Removes all elements which are greater that given
-     *
      * @param worker Element to compare with
+     * @return Number of deleted elements
      */
-    public void removeGreater(Worker worker){
+    public int removeGreater(Worker worker){
+        int oldSize = this.collection.size();
         this.collection.removeIf(worker1 -> worker1.compareTo(worker) > 0);
+
+        this.changeFlag = true;
+
+        return oldSize - this.collection.size();
     }
 
     /**
      * Removes all elements which are lowers than given
      *
      * @param worker Element to compare with
+     * @return Number of deleted elements
      */
-    public void removeLower(Worker worker){
+    public int removeLower(Worker worker){
+        int oldSize = this.collection.size();
         this.collection.removeIf(worker1 -> worker1.compareTo(worker) < 0);
+
+        this.changeFlag = true;
+
+        return oldSize - this.collection.size();
     }
 
     /**

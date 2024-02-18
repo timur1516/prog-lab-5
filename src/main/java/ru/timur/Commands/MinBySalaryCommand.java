@@ -15,7 +15,7 @@ public class MinBySalaryCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws InvalidDataException {
+    public void execute() throws InvalidDataException {
         if(this.collectionController.getCollection().isEmpty()){
             throw new NoSuchElementException("Collection is empty!");
         }
@@ -23,7 +23,7 @@ public class MinBySalaryCommand extends UserCommand {
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

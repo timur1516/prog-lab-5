@@ -1,14 +1,11 @@
 package ru.timur.Commands;
 
 import ru.timur.Exceptions.InvalidDataException;
-import ru.timur.Exceptions.RecursiveScriptException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Objects;
 
-public abstract class UserCommand {
+public abstract class UserCommand implements ICommand {
     /**
      * Command name
      */
@@ -32,23 +29,18 @@ public abstract class UserCommand {
         this.arguments = arguments;
         this.description = description;
     }
+    @Override
     public String getName(){
         return this.name;
     }
 
     /**
-     * This method completes action which command must do
-     * @param commandArgs list of command arguments
-     * @throws InvalidDataException if error while reading input values is occurred (useful in script mode)
+     * Method to check and load arguments of command
+     * @param commandArgs String array with different arguments
+     * @throws WrongAmountOfArgumentsException If number of arguments is wrong for given command
+     * @throws InvalidDataException if command argument are not valid
      */
-    public abstract void execute(String[] commandArgs) throws IOException, RecursiveScriptException;
-
-    /**
-     * This method check if command argument are correct
-     * Method checks if amount of arguments is correct and if their type is correct
-     * @param commandArgs list of command arguments
-     */
-    public abstract void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException, InvalidDataException, FileNotFoundException, RecursiveScriptException;
+    public abstract void initCommandArgs(String[] commandArgs) throws InvalidDataException, WrongAmountOfArgumentsException;
 
     @Override
     public boolean equals(Object o) {

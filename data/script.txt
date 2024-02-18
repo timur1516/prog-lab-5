@@ -10,5 +10,6 @@ FIRED
 125
 RED
 VATICAN
+execute_script C:\Users\hache\IdeaProjects\Lab5\data\script1.txt
 show
 clear

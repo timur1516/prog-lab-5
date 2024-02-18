@@ -18,13 +18,13 @@ public class FilterLessThanEndDateCommand extends UserCommand {
     }
 
     @Override
-    public void execute(String[] commandArgs) throws InvalidDataException {
+    public void execute() throws InvalidDataException {
         LocalDateTime endDate = workerReader.readEndDate();
         Console.getInstance().printLn(this.collectionController.getLessThanEndDate(endDate));
     }
 
     @Override
-    public void validateCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
+    public void initCommandArgs(String[] commandArgs) throws WrongAmountOfArgumentsException {
         if(commandArgs.length != 0) throw new WrongAmountOfArgumentsException("Wrong amount of arguments!", 0, commandArgs.length);
     }
 }

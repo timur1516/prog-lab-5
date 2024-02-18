@@ -48,7 +48,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Console.getInstance().setScanner(new Scanner(System.in));
-        collectionController = new CollectionController(loadData(dataFilePath));
+        collectionController = new CollectionController(loadData());
         workerReader = new WorkerReader(collectionController);
         commandsController = new CommandsController(collectionController, workerReader, dataFileController);
         interactiveMode();
@@ -56,10 +56,9 @@ public class Main {
 
     /**
      * method which is used to work with script file
-     * @throws IOException If there are some problems with reading file
-     * @throws RecursiveScriptException If completing script is recursive
+     * @throws Exception if any error occurred in process of executing
      */
-    public static void scriptMode() throws RecursiveScriptException, IOException {
+    public static void scriptMode() throws Exception {
         while(Console.getInstance().hasNextLine()) {
             String s = Console.getInstance().readLine();
             String[] input = (s.trim() + " ").split(" ");
@@ -68,7 +67,7 @@ public class Main {
             Console.getInstance().printLn(commandName);
             String[] commandArgs = Arrays.copyOfRange(input, 1, input.length);
             UserCommand command = commandsController.launchCommand(commandName, commandArgs);
-            command.execute(commandArgs);
+            command.execute();
         }
     }
     public static void interactiveMode(){
@@ -81,14 +80,14 @@ public class Main {
 
             try {
                 UserCommand command = commandsController.launchCommand(commandName, commandArgs);
-                command.execute(commandArgs);
+                command.execute();
             }
             catch (Exception e){
                 Console.getInstance().printError(e.getMessage());
             }
         }
     }
-    private static PriorityQueue<Worker> loadData(String path){
+    private static PriorityQueue<Worker> loadData(){
         PriorityQueue<Worker> data = null;
         try {
             dataFileController = new DataFileController(dataFilePath);
