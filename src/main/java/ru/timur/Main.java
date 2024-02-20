@@ -6,6 +6,7 @@ import ru.timur.Commands.UserCommand;
 import ru.timur.Controllers.CollectionController;
 import ru.timur.Controllers.CommandsController;
 import ru.timur.Controllers.DataFileController;
+import ru.timur.Controllers.FileLoader;
 import ru.timur.Exceptions.InvalidDataException;
 import ru.timur.Exceptions.RecursiveScriptException;
 import ru.timur.UI.Console;
@@ -15,15 +16,10 @@ import java.util.*;
 
 /**
  * Main app class
- * Completes initialization of all controllers, sets default input stream for Console
- * In the beginning loads data file (if it is wrong program stops), then calls interactiveMode method
+ * <p>Completes initialization of all controllers, sets default input stream for Console
+ * <p>In the beginning loads data file (if it is wrong program stops), then calls interactiveMode method
  */
 public class Main {
-    /**
-     * Path to json file with initial collection data
-     * Is taken from Environmental variable
-     */
-    private static final String dataFilePath = System.getenv("ProgDataFile");
     /**
      * Controller of collection
      */
@@ -39,11 +35,11 @@ public class Main {
     /**
      * Controller of data file
      */
-    private static DataFileController dataFileController = null;
+    private static DataFileController dataFileController;
 
     /**
      * Main method of program
-     * Call methods to load data file, init all controllers and start handling user commands
+     * <p>Calls methods to load data file, init all controllers and start handling user commands
      * @param args (not used)
      */
     public static void main(String[] args) {
@@ -74,8 +70,8 @@ public class Main {
     /**
      * Method to handle user input
      *
-     * Reads commands from user, gets their name and arguments, launch command and execute it
-     * If any error is occurred method prints error message and continues to read data
+     * <p>Reads commands from user, gets their name and arguments, launch command and execute it
+     * <p>If any error is occurred method prints error message and continues to read data
      */
     public static void interactiveMode(){
         while(Console.getInstance().hasNextLine()) {
@@ -95,31 +91,51 @@ public class Main {
         }
     }
 
+    private static String readFileName(){
+        Console.getInstance().print("Enter environmental variable name: ");
+        String envName = Console.getInstance().readLine().trim();
+        String dataFilePath = System.getenv(envName);
+        if(dataFilePath == null){
+            Console.getInstance().printError("Environmental variable is not defined!");
+            System.exit(0);
+        }
+        return dataFilePath;
+    }
+
     /**
      * Method to load collection from data file.
-     * Method also completes validation of filePath and collection inside dataFile
+     * <p>Method also completes validation of filePath and collection inside dataFile
      * @return Collection of workers
      * @see DataFileController
      * @see CollectionController
      */
     private static PriorityQueue<Worker> loadData(){
+        String dataFilePath = readFileName();
+
         PriorityQueue<Worker> data = null;
+        File dataFile = null;
+
         try {
-            dataFileController = new DataFileController(dataFilePath);
+            dataFile = new FileLoader().loadFile(dataFilePath, "json", "rw", "data file");
         } catch (FileNotFoundException e) {
-            Console.getInstance().printError("File not found!");
+            Console.getInstance().printError(e.getMessage());
             System.exit(0);
         }
+
+        dataFileController = new DataFileController(dataFile);
+
         try {
             data = dataFileController.readJSON();
         } catch (Exception e) {
             Console.getInstance().printError("Data file reading error!");
             System.exit(0);
         }
+        if(data == null) data = new PriorityQueue<>();
         if(!CollectionController.isValid(data)){
             Console.getInstance().printError("Data file is not valid!");
             System.exit(0);
         }
+        Console.getInstance().printLn("Data loaded successfully!");
         return data;
     }
 }

@@ -12,60 +12,60 @@ import java.util.Objects;
 public class Worker implements Comparable<Worker> {
     /**
      * Worker's id,
-     * Must be greater than zero,
-     * Must be unique,
-     * Value is generated automatically
+     * <p>Must be greater than zero,
+     * <p>Must be unique,
+     * <p>Value is generated automatically
      */
     private long id;
 
     /**
      * Worker's name,
-     * Can't be null,
-     * Can't be empty
+     * <p>Can't be null,
+     * <p>Can't be empty
      */
     private String name;
 
     /**
      * Worker's coordinates,
-     * Can't be null
+     * <p>Can't be null
      */
     private Coordinates coordinates;
 
     /**
      * Creation date of object,
-     * Can't be null,
-     * Value is generated automatically
+     * <p>Can't be null,
+     * <p>Value is generated automatically
      */
     private java.time.ZonedDateTime creationDate;
 
     /**
      * Worker's salary,
-     * Can't be null,
-     * Must be greater than zero
+     * <p>Can't be null,
+     * <p>Must be greater than zero
      */
     private Integer salary;
 
     /**
      * Start day of work,
-     * Can't be null
+     * <p>Can't be null
      */
     private java.time.LocalDateTime startDate;
 
     /**
      * End day of work,
-     * Can't be null
+     * <p>Can't be null
      */
     private java.time.LocalDateTime endDate;
 
     /**
      * Worker's status,
-     * Can't be null
+     * <p>Can't be null
      */
     private Status status;
 
     /**
      * Person of worker,
-     * Can't be null
+     * <p>Can't be null
      */
     private Person person;
 
@@ -163,7 +163,7 @@ public class Worker implements Comparable<Worker> {
 
     /**
      * Method to compare to workers
-     * Elements are compared by their coordinates (distance from beginning of coordinate system)
+     * <p>Elements are compared by their coordinates (distance from beginning of coordinate system)
      * @param o the object to be compared.
      * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
      */

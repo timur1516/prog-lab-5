@@ -8,7 +8,7 @@ import ru.timur.UI.Console;
 
 /**
  * Abstract class to read any value from user
- * It validates input data and keep asking user until input is correct
+ * <p>It validates input data and keep asking user until input is correct
  */
 public abstract class ValueReader {
     /**

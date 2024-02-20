@@ -2,26 +2,24 @@ package ru.timur.Collection;
 
 /**
  * Class to store and work with Person objects
- *
- * @author Timur Stupin
  */
 public class Person {
     /**
      * Person's height,
-     * Can't be null,
-     * Must be greater than zero
+     * <p>Can't be null,
+     * <p>Must be greater than zero
      */
     private Long height;
 
     /**
      * Person's eye color,
-     * Can't be null
+     * <p>Can't be null
      */
     private Color eyeColor;
 
     /**
      * Person's nationality,
-     * Can't be null
+     * <p>Can't be null
      */
     private Country nationality;
 

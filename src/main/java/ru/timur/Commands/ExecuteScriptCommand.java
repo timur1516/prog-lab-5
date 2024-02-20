@@ -1,20 +1,13 @@
 package ru.timur.Commands;
 
 import ru.timur.Constants;
-import ru.timur.Exceptions.InvalidDataException;
+import ru.timur.Controllers.FileLoader;
 import ru.timur.Exceptions.RecursiveScriptException;
 import ru.timur.Exceptions.WrongAmountOfArgumentsException;
-import ru.timur.Exceptions.WrongFilePermissionsException;
 import ru.timur.Main;
 import ru.timur.UI.Console;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -48,27 +41,19 @@ public class ExecuteScriptCommand extends UserCommand {
     @Override
     public void execute() throws Exception {
 
-        Path path = Paths.get(scriptFilePath);
-        if(!Files.exists(path)){
-            throw new FileNotFoundException("Script file does not exist!");
-        }
-        if(Files.isDirectory(path)){
-            throw new FileNotFoundException("Given path is a directory!");
-        }
-        if(!scriptFilePath.endsWith(".txt")){
-            throw new FileNotFoundException("Script file must be .txt!");
-        }
-        if(!Files.isReadable(path)){
-            throw new WrongFilePermissionsException("Wrong script file permissions! File is not readable!");
-        }
+        File scriptFile = new FileLoader().loadFile(scriptFilePath, "txt", "r", "Script file");
 
         if(!Constants.scriptStack.isEmpty() && Constants.scriptStack.contains(scriptFilePath)){
             throw new RecursiveScriptException("Script is recursive!");
         }
+
         Constants.scriptStack.push(scriptFilePath);
+
         Scanner prevScanner = Console.getInstance().getScanner();
-        Console.getInstance().setScanner(new Scanner(new FileInputStream(scriptFilePath)));
+        Console.getInstance().setScanner(new Scanner(new FileInputStream(scriptFile)));
+
         Constants.SCRIPT_MODE = true;
+
         try {
             Main.scriptMode();
             Console.getInstance().printLn("Script executed successfully!");

@@ -19,7 +19,7 @@ public class DataFileController {
     /**
      * Path to data file
      */
-    private final String fileName;
+    private final File dataFile;
     /**
      * Gson object to operate with JSON data file
      */
@@ -28,14 +28,10 @@ public class DataFileController {
     /**
      * DataFileController constructor
      * <p>Validate path to dataFile and initialize Gson
-     * @param fileName path to data file
-     * @throws FileNotFoundException if path to file is incorrect
+     * @param dataFile file with data
      */
-    public DataFileController(String fileName) throws FileNotFoundException {
-        if(!isValidPath(fileName)){
-            throw new FileNotFoundException();
-        }
-        this.fileName = fileName;
+    public DataFileController(File dataFile) {
+        this.dataFile = dataFile;
 
         GsonBuilder gsonBuilder = new GsonBuilder();
 
@@ -48,22 +44,12 @@ public class DataFileController {
     }
 
     /**
-     * Method to check if path to file is valid
-     * @param path
-     * @return true is path is correct and false otherwise
-     */
-    private  boolean isValidPath(String path){
-        File f = new File(path);
-        return f.exists() && !f.isDirectory();
-    }
-
-    /**
      * Method to write collection to dataFile
      * @param data collection to write
      * @throws IOException If any error occurred while writing
      */
     public void writeToJSON(PriorityQueue<Worker> data) throws IOException {
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(fileName));
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(dataFile));
         Type dataType = new TypeToken<PriorityQueue<Worker>>(){}.getType();
         String output = this.gson.toJson(data, dataType);
         outputStreamWriter.write(output);
@@ -78,7 +64,7 @@ public class DataFileController {
      * @throws JsonParseException If it is impossible to deserialize file
      */
     public PriorityQueue<Worker> readJSON() throws IOException, JsonParseException {
-        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(fileName));
+        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(dataFile));
         Type dataType = new TypeToken<PriorityQueue<Worker>>(){}.getType();
         return this.gson.fromJson(new JsonReader(inputStreamReader), dataType);
     }

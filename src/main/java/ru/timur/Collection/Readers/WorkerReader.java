@@ -100,7 +100,7 @@ public class WorkerReader extends ValueReader {
     /**
      * Method to read workers end date
      *
-     * Before reading user is asked if worker has endDate
+     * <p>Before reading user is asked if worker has endDate
      * @return LocalDateTime value of endDate or null if it is no endDate
      * @throws InvalidDataException If input is wrong and script mode is on
      */
@@ -112,7 +112,7 @@ public class WorkerReader extends ValueReader {
 
     /**
      * Method to read workers status
-     * Before reading method prints all possible values of status
+     * <p>Before reading method prints all possible values of status
      *
      * @return Status value
      * @throws InvalidDataException If input is wrong and script mode is on
@@ -129,7 +129,7 @@ public class WorkerReader extends ValueReader {
 
     /**
      * Method to read workers person
-     * Before reading user is asked if worker has person
+     * <p>Before reading user is asked if worker has person
      * @return Person value or null if worker doesn't have person
      * @throws InvalidDataException If input is wrong and script mode is on
      */
@@ -150,7 +150,7 @@ public class WorkerReader extends ValueReader {
 
     /**
      * Method to read persons eye color
-     * Before reading method asks if person has eye color and if answer is yes all possible Colors are printed
+     * <p>Before reading method asks if person has eye color and if answer is yes all possible Colors are printed
      * @return Color value
      * @throws InvalidDataException If input is wrong and script mode is on
      */
@@ -168,7 +168,7 @@ public class WorkerReader extends ValueReader {
 
     /**
      * Method to read persons nationality
-     * Before reading method asks if person has nationality and if answer is yes all possible Countries are printed
+     * <p>Before reading method asks if person has nationality and if answer is yes all possible Countries are printed
      * @return Country value
      * @throws InvalidDataException If input is wrong and script mode is on
      */

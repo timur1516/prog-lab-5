@@ -5,8 +5,8 @@ package ru.timur.Collection;
  */
 public class Coordinates implements Comparable<Coordinates>{
     /**
-     * x coordinate,
-     * Max value is 657
+     * x coordinate
+     * <p>Max value is 657
      */
     private double x;
 

@@ -20,7 +20,7 @@ public class CollectionController {
     private PriorityQueue<Worker> collection;
     /**
      * Collection's creation date
-     * In fact it is equal to CollectionManager object creation date
+     * <p>In fact it is equal to CollectionManager object creation date
      */
     private final LocalDateTime creationDate;
     /**
@@ -41,9 +41,9 @@ public class CollectionController {
 
     /**
      * Method to check if collection contains valid values
-     * Used to validate input collection from data file
-     * Firstly it checks if all id are unique
-     * Then it validate all fields using WorkerValidator
+     * <p>Used to validate input collection from data file
+     * <p>Firstly it checks if all id are unique
+     * <p>Then it validate all fields using WorkerValidator
      * @return
      */
     public static boolean isValid(PriorityQueue<Worker> collection){
@@ -76,7 +76,7 @@ public class CollectionController {
 
     /**
      * Method to generate unique id for new element of collection
-     * It gets the maximum id in current collection and then increments it
+     * <p>It gets the maximum id in current collection and then increments it
      * @return id
      */
     public long generateId(){
