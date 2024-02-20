@@ -9,6 +9,9 @@ import ru.timur.Constants;
 import java.lang.reflect.Type;
 import java.time.ZonedDateTime;
 
+/**
+ * Custom serializer to write ZonedDateTime to JSON files
+ */
 public class ZonedDateTimeSerializer implements JsonSerializer<ZonedDateTime> {
     @Override
     public JsonElement serialize(ZonedDateTime zonedDateTime, Type type, JsonSerializationContext jsonSerializationContext) {

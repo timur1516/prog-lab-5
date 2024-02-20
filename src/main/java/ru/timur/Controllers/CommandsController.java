@@ -20,6 +20,13 @@ public class CommandsController {
      */
     private final ArrayList<ICommand> commandsList;
 
+    /**
+     * CommandsController constructor
+     * <p>Gets all required controllers and initialize all commands
+     * @param collectionController
+     * @param workerReader
+     * @param dataFileController
+     */
     public CommandsController(CollectionController collectionController, WorkerReader workerReader, DataFileController dataFileController){
         this.commandsList  = new ArrayList<>(Arrays.asList(
                 new HelpCommand(this),
@@ -48,11 +55,12 @@ public class CommandsController {
     public ArrayList<ICommand> getCommandsList() {
         return commandsList;
     }
+
     /**
-     * Method to find command by its name and validate its argument
+     * Method to find command by its name and init its argument
      * @param commandName Name of command to find
      * @param commandArgs Arguments of command
-     * @return ICommand object
+     * @return UserCommand object
      * @throws WrongAmountOfArgumentsException If number of arguments is wrong for given command
      * @throws NoSuchElementException If command not found
      * @throws InvalidDataException if command argument are not valid

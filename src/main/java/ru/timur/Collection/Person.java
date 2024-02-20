@@ -25,12 +25,22 @@ public class Person {
      */
     private Country nationality;
 
+    /**
+     * Person class constructor
+     * @param height height
+     * @param eyeColor eye color
+     * @param nationality nationality
+     */
     public Person(Long height, Color eyeColor, Country nationality) {
         this.height = height;
         this.eyeColor = eyeColor;
         this.nationality = nationality;
     }
 
+    /**
+     * Method to get formatted string representation of Person
+     * @return String value
+     */
     @Override
     public String toString() {
         return "Person:\n" +
@@ -39,14 +49,26 @@ public class Person {
                 "\tnationality: " + nationality + "\n";
     }
 
+    /**
+     * Method to get persons height
+     * @return height value
+     */
     public Long getHeight() {
         return height;
     }
 
+    /**
+     * Method to get persons eye color
+     * @return eyeColor value
+     */
     public Color getEyeColor() {
         return eyeColor;
     }
 
+    /**
+     * Method to get persons nationality
+     * @return Nationality value
+     */
     public Country getNationality() {
         return nationality;
     }

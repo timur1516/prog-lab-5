@@ -15,8 +15,8 @@ import java.util.*;
 
 /**
  * Main app class
- * Completes initialization of all controllers, set default input stream for Console
- * In the beginning load data file (if it is wrong program stops), then call interactiveMode method
+ * Completes initialization of all controllers, sets default input stream for Console
+ * In the beginning loads data file (if it is wrong program stops), then calls interactiveMode method
  */
 public class Main {
     /**
@@ -70,6 +70,13 @@ public class Main {
             command.execute();
         }
     }
+
+    /**
+     * Method to handle user input
+     *
+     * Reads commands from user, gets their name and arguments, launch command and execute it
+     * If any error is occurred method prints error message and continues to read data
+     */
     public static void interactiveMode(){
         while(Console.getInstance().hasNextLine()) {
             String s = Console.getInstance().readLine();
@@ -87,6 +94,14 @@ public class Main {
             }
         }
     }
+
+    /**
+     * Method to load collection from data file.
+     * Method also completes validation of filePath and collection inside dataFile
+     * @return Collection of workers
+     * @see DataFileController
+     * @see CollectionController
+     */
     private static PriorityQueue<Worker> loadData(){
         PriorityQueue<Worker> data = null;
         try {

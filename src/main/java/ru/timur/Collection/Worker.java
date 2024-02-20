@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+/**
+ *
+ */
 public class Worker implements Comparable<Worker> {
     /**
      * Worker's id,
@@ -162,7 +165,7 @@ public class Worker implements Comparable<Worker> {
      * Method to compare to workers
      * Elements are compared by their coordinates (distance from beginning of coordinate system)
      * @param o the object to be compared.
-     * @return integer value (0 - equal, <0 - less, >0 - greater)
+     * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
      */
     @Override
     public int compareTo(Worker o) {
@@ -170,7 +173,7 @@ public class Worker implements Comparable<Worker> {
     }
 
     /**
-     * Method to get String version of worker
+     * Method to get formatted String representation of worker
      * @return Formatted String with structured info about element
      */
     @Override

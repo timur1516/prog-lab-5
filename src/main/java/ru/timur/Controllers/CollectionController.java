@@ -28,6 +28,11 @@ public class CollectionController {
      */
     private boolean changeFlag;
 
+    /**
+     * CollectionController constructor
+     * <p>Completes initialization of collection, generate creationDate and set changeFlag to false
+     * @param collection
+     */
     public CollectionController(PriorityQueue<Worker> collection) {
         this.collection = collection;
         this.creationDate = LocalDateTime.now();

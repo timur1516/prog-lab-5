@@ -12,6 +12,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+/**
+ * Custom deserializer to parse ZonedDateTime from JSON files
+ */
 public class ZonedDateTimeDeserializer implements JsonDeserializer<ZonedDateTime> {
     @Override
     public ZonedDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {

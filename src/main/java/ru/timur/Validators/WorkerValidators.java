@@ -6,6 +6,10 @@ import ru.timur.Exceptions.InvalidDataException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
+/**
+ * Class which contains validators for all fields of Worker
+ * <p>All validators realize constraints given by task
+ */
 public class WorkerValidators {
     public static Validator<Worker> workerValidator = new Validator<Worker>() {
         @Override
